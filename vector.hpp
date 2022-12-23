@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2022/12/15 12:58:22 by stan             ###   ########.fr       */
+/*   Updated: 2022/12/23 16:08:33 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <cstddef>
 # include <tgmath.h>
 # include <iostream>
+# include "iterator.hpp"
 
 namespace ft
 {
@@ -28,16 +29,16 @@ namespace ft
 
 				typedef T                                                          value_type;
 				typedef Alloc                                                      allocator_type;
+				typedef size_t                       							   size_type;
 				typedef typename allocator_type::reference                         reference;
 				typedef typename allocator_type::const_reference                   const_reference;
 				typedef typename allocator_type::pointer                           pointer;
 				typedef typename allocator_type::const_pointer                     const_pointer;
-				// typedef ft::random_access_iterator<value_type>                     iterator;
-				// typedef ft::random_access_iterator<const value_type>               const_iterator;
-				// typedef ft::reverse_iterator<iterator>                             reverse_iterator;        
-				// typedef ft::reverse_iterator<const_iterator>                       const_reverse_iterator;
-				// typedef typename ft::iterator_traits<iterator>::difference_type    difference_type; 
-				typedef size_t                       size_type;
+				typedef Iterator_vec<random_access_iterator_tag, T>                iterator;
+				typedef Iterator_vec<random_access_iterator_tag, T>                const_iterator;
+				typedef RevIterator_vec<random_access_iterator_tag, T>             reverse_iterator;        
+				typedef RevIterator_vec<random_access_iterator_tag, T>             const_reverse_iterator;
+				typedef typename std::ptrdiff_t								       difference_type; 
 
 				/* Member functions */
 
@@ -46,13 +47,25 @@ namespace ft
 
 				explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _capacity(n),  _size(n)
 			    {
-				_begin = _alloc.allocate(n);
-				for (size_type i = 0; i < n; i++)
-					_alloc.construct(&_begin[i], val);
+				    _begin = _alloc.allocate(n);
+				    for (size_type i = 0; i < n; i++)
+				    	_alloc.construct(&_begin[i], val);
 			    }
 
 				// template <class InputIterator>
-				// vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+				// vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc)
+                // {
+                //     if (first > last)
+                //         throw (std::invalid_argument("vector::vector"));
+                //     size_type n = 0;
+				// 	for (InputIterator it = first; it != last; it++)
+				// 		n++;
+				// 	_capacity = n;
+				// 	_size = n;
+				// 	_begin = _alloc.allocate(n);
+				// 	for (size_type i = 0; i < n; i++)
+				// 		_alloc.construct(&_begin[i], first++);
+                // }
 
 				vector (const vector& x) : _alloc(x._alloc), _capacity(x._size), _size(x._size)
 			    {
@@ -80,21 +93,21 @@ namespace ft
 
 				/* Iterators */
 
-				// iterator begin();
+				iterator begin() { return (iterator(this->_begin)); }
 
-				//const_iterator begin() const;
+				const_iterator begin() const { return (const_iterator(this->_begin)); }
 
-				// iterator end();
+				iterator end() { return (iterator(this->_begin) + _size); }
 
-				//const_iterator end() const;
+				const_iterator end() const { return (const_iterator(this->_begin) + _size); }
 
-				// reverse_iterator rbegin();
+				reverse_iterator rbegin() { return (iterator(this->_begin) +  _size - 1); }
 
-				// const_reverse_iterator rbegin() const;
+				const_reverse_iterator rbegin() const { return (const_iterator(this->_begin) + _size - 1); }
 
-				// reverse_iterator rend();
+				reverse_iterator rend() { return (iterator(this->_begin) - 1); }
 
-				// const_reverse_iterator rend() const;
+				const_reverse_iterator rend() const { return (const_iterator(this->_begin) - 1); }
 
 				/* Capacity */
 
@@ -160,8 +173,15 @@ namespace ft
 
 				/* Modifiers */
 
-				// template <class InputIterator>
-				// void assign (InputIterator first, InputIterator last);
+				template <class InputIterator>
+				void assign (InputIterator first, InputIterator last)
+				{
+                    if (first > last)
+                        throw (std::invalid_argument("vector::assign"));
+					this->clear();
+					for (; first != last; first++)
+                		push_back(*first);
+				}
 
 				void assign (size_type n, const value_type& val)
 				{
@@ -272,19 +292,19 @@ namespace ft
         return true;
     }
 
-	template <class T, class Alloc>
-    bool operator != (const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) { return !(lhs == rhs); }
+	// template <class T, class Alloc>
+    // bool operator != (const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) { return !(lhs == rhs); }
+    
+    // // template <class T, class Alloc>
+    // // bool operator< (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) 
+    // // { return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()); }
     
     // template <class T, class Alloc>
-    // bool operator< (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) 
-    // { return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()); }
+    // bool operator>(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) { return rhs < lhs; }
     
-    template <class T, class Alloc>
-    bool operator>(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) { return rhs < lhs; }
+    // template <class T, class Alloc>
+    // bool operator<=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) { return !(lhs > rhs); }
     
-    template <class T, class Alloc>
-    bool operator<=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) { return !(lhs > rhs); }
-    
-    template <class T, class Alloc>
-    bool operator>=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) { return !(lhs < rhs); }
+    // template <class T, class Alloc>
+    // bool operator>=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs) { return !(lhs < rhs); }
 }
