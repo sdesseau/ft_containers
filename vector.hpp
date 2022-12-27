@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2022/12/23 16:08:33 by stan             ###   ########.fr       */
+/*   Updated: 2022/12/27 14:51:38 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 # include <memory>
 # include <algorithm>
 # include <cstddef>
+# include <limits>
 # include <tgmath.h>
 # include <iostream>
 # include "iterator.hpp"
+# include "utils.hpp"
 
 namespace ft
 {
@@ -52,20 +54,20 @@ namespace ft
 				    	_alloc.construct(&_begin[i], val);
 			    }
 
-				// template <class InputIterator>
-				// vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc)
-                // {
-                //     if (first > last)
-                //         throw (std::invalid_argument("vector::vector"));
-                //     size_type n = 0;
-				// 	for (InputIterator it = first; it != last; it++)
-				// 		n++;
-				// 	_capacity = n;
-				// 	_size = n;
-				// 	_begin = _alloc.allocate(n);
-				// 	for (size_type i = 0; i < n; i++)
-				// 		_alloc.construct(&_begin[i], first++);
-                // }
+				template <class InputIterator>
+				vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<InputIterator::iter, InputIterator>::type = NULL) : _alloc(alloc)
+                {
+                    if (first > last)
+                        throw (std::invalid_argument("vector::vector"));
+                    size_type n = 0;
+					for (InputIterator it = first; it != last; it++)
+						n++;
+					_capacity = n;
+					_size = n;
+					_begin = _alloc.allocate(n);
+					for (size_type i = 0; i < n; i++)
+						_alloc.construct(&_begin[i], *first++);
+                }
 
 				vector (const vector& x) : _alloc(x._alloc), _capacity(x._size), _size(x._size)
 			    {
@@ -227,12 +229,62 @@ namespace ft
 					_size--;
 				}
 
-				// iterator insert (iterator position, const value_type& val);
+				iterator insert (iterator position, const value_type& val)
+				{
+					(void)val;
+					if (position < begin())
+						throw (std::out_of_range("vector::insert"));
+					insert(position, 1, val);
+					return (end());
+				}
 
-				// void insert (iterator position, size_type n, const value_type& val);
+				void insert (iterator position, size_type n, const value_type& val)
+				{
+					iterator	it = end();
+					vector		tmp(position, it);
+					
+            		if ((n + _size) > (_capacity * 2))
+            		    reserve(n + _size);
+					while (it != position)
+					{
+						pop_back();
+						it--;
+					}
+					while (n)
+					{
+						push_back(val);
+						n--;
+					}
+					it = tmp.begin();
+					while (it != tmp.end())
+					{
+						push_back(*it);
+						it++;
+					}
+				}
 
 				// template <class InputIterator>
-				// void insert (iterator position, InputIterator first, InputIterator last);
+				// void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<InputIterator::iter, InputIterator>::type = NULL)
+				// {
+				// 	iterator	it = end();
+				// 	vector		tmp(position, it);
+					
+            	// 	if ((last - first) + _size > _capacity * 2)
+            	// 	    reserve((last - first) + _size);
+				// 	while (it != position)
+				// 	{
+				// 		pop_back();
+				// 		it--;
+				// 	}
+				// 	while (first != last)
+				// 		push_back(*first++);
+				// 	it = tmp.begin();
+				// 	while (it != tmp.end())
+				// 	{
+				// 		push_back(*it);
+				// 		it++;
+				// 	}
+				// }
 
 				// iterator erase (iterator position);
 

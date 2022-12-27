@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2022/12/23 15:26:24 by stan             ###   ########.fr       */
+/*   Updated: 2022/12/27 14:51:42 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,15 @@ namespace ft
                 return (*this);
             }
 
+            // friend Iterator_vec	operator-(difference_type n, const Iterator_vec& it) 
+            // {
+            //     return Iterator_vec(it._ptr - n); 
+            // }
+            // friend difference_type	operator-(const Iterator_vec& a, const Iterator_vec& b)
+            // {
+            //     return (a._ptr - b._ptr);
+            // }
+
             T &operator*() {return (*_ptr);}
             T *operator->() {return (&(operator*)());}
             
@@ -110,6 +119,8 @@ namespace ft
             bool operator<=(const Iterator_vec &other) const { return (_ptr <= other._ptr); }
             bool operator>(const Iterator_vec &other) const { return (_ptr > other._ptr); }
             bool operator<(const Iterator_vec &other) const { return (_ptr < other._ptr); }
+
+            static const bool iter = true;
     };
 
     template <class Category, class T, class Distance = ptrdiff_t, class Reference = T&, class Pointer = T*>
@@ -181,5 +192,7 @@ namespace ft
             bool &operator<=(const RevIterator_vec &other) const { return (_ptr <= other._ptr); }
             bool &operator>(const RevIterator_vec &other) const { return (_ptr > other._ptr); }
             bool &operator<(const RevIterator_vec &other) const { return (_ptr < other._ptr); }
+
+            static const bool iter = true;
     };
 }
