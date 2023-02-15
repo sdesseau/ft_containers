@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2022/12/27 14:51:42 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:20:11 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ namespace ft
 
     struct random_access_iterator_tag : public bidirectional_iterator_tag {};
 
+    template<typename Iterator>
+    struct iterator_traits;
+
     template<class Iterator>
-    class iterator_traits
+    struct iterator_traits
     {
 	    public :
 	    	typedef typename Iterator::iterator_category	iterator_category;
@@ -37,17 +40,51 @@ namespace ft
 	    	typedef typename Iterator::pointer		        pointer;	
 	    	typedef typename Iterator::reference		    reference;	
     };
+
+    template<typename Tp>
+    struct iterator_traits<Tp*>
+    {
+	    public :
+	    	typedef random_access_iterator_tag	iterator_category;	
+	    	typedef Tp		                    value_type;	
+	    	typedef std::ptrdiff_t		        difference_type;	
+	    	typedef Tp*		                    pointer;	
+	    	typedef Tp&		                    reference;
+    };
+
+    template<typename Tp>
+    struct iterator_traits<const Tp*>
+    {
+	    public :
+	    	typedef random_access_iterator_tag	iterator_category;	
+	    	typedef Tp		                    value_type;	
+	    	typedef std::ptrdiff_t		        difference_type;	
+	    	typedef const Tp*		            pointer;	
+	    	typedef const Tp&		            reference;
+    };
+
+    template <class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>
+    struct iterator
+    {
+		typedef Category		iterator_category;	
+		typedef T		        value_type;	
+		typedef Distance		difference_type;	
+		typedef Pointer		    pointer;	
+		typedef Reference		reference;	
+
+    };
     
     template <class Category, class T, class Distance = ptrdiff_t, class Reference = T&, class Pointer = T*>
-    class Iterator_vec
+    class Iterator_vec : public ft::iterator<ft::random_access_iterator_tag, T>
     {
         private:
             T *_ptr;
         public:
-            typedef T           value_type;
-            typedef Category    iterator_category;
-            typedef Reference   reference;
-            typedef Distance    difference_type;
+            typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
+		    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type		    value_type;	
+		    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type		difference_type;	
+		    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			    pointer;	
+		    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			    reference;
 
 
             Iterator_vec() : _ptr(NULL) {}
@@ -58,7 +95,7 @@ namespace ft
 
             ~Iterator_vec() {}
 
-            Iterator_vec& operator=(const Iterator_vec& other)
+            Iterator_vec &operator=(const Iterator_vec& other)
             {
                 _ptr = other._ptr;
                 return (*this);
@@ -80,13 +117,13 @@ namespace ft
             {
                 Iterator_vec tmp(*this);
                 _ptr++;
-                return tmp;
+                return (tmp);
             }
             Iterator_vec operator--(int)
             {
                 Iterator_vec tmp(*this);
                 _ptr--;
-                return tmp;
+                return (tmp);
             }
 
             Iterator_vec &operator+(int i)
@@ -101,17 +138,18 @@ namespace ft
                 return (*this);
             }
 
-            // friend Iterator_vec	operator-(difference_type n, const Iterator_vec& it) 
-            // {
-            //     return Iterator_vec(it._ptr - n); 
-            // }
-            // friend difference_type	operator-(const Iterator_vec& a, const Iterator_vec& b)
-            // {
-            //     return (a._ptr - b._ptr);
-            // }
-
             T &operator*() {return (*_ptr);}
             T *operator->() {return (&(operator*)());}
+
+            friend Iterator_vec	operator-(difference_type n, const Iterator_vec& it) 
+            {
+                return (Iterator_vec(it._ptr - n));
+            }
+
+            friend difference_type	operator-(const Iterator_vec& a, const Iterator_vec& b)
+            {
+                return (a._ptr - b._ptr);
+            }
             
             bool operator==(const Iterator_vec &other) const { return (_ptr == other._ptr); }
             bool operator!=(const Iterator_vec &other) const { return (_ptr != other._ptr); }
@@ -119,8 +157,6 @@ namespace ft
             bool operator<=(const Iterator_vec &other) const { return (_ptr <= other._ptr); }
             bool operator>(const Iterator_vec &other) const { return (_ptr > other._ptr); }
             bool operator<(const Iterator_vec &other) const { return (_ptr < other._ptr); }
-
-            static const bool iter = true;
     };
 
     template <class Category, class T, class Distance = ptrdiff_t, class Reference = T&, class Pointer = T*>
@@ -192,7 +228,5 @@ namespace ft
             bool &operator<=(const RevIterator_vec &other) const { return (_ptr <= other._ptr); }
             bool &operator>(const RevIterator_vec &other) const { return (_ptr > other._ptr); }
             bool &operator<(const RevIterator_vec &other) const { return (_ptr < other._ptr); }
-
-            static const bool iter = true;
     };
 }
