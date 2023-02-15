@@ -6,7 +6,7 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:12:13 by sdesseau          #+#    #+#             */
-/*   Updated: 2023/02/15 12:44:38 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:59:48 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ namespace ft
 
                 /* Member fucntions */
                 
-                explicit stack( const container_type& cont = container_type() ) : c(container_type) {}
+                explicit stack( const container_type& c = container_type() ) : c(c) {}
 
                 ~stack() {}
 
                 stack& operator=( const stack& other )
                 {
-                    if (this.c != other.c)
-                        this.c = other.c;
+                    this->c = other->c;
                     return (*this);
                 }
                 
@@ -54,7 +53,7 @@ namespace ft
 
                 /* Modifiers */
 
-                void push( const value_type& value ) { return (c.push_back()); }
+                void push( const value_type& value ) { return (c.push_back(value)); }
 
                 void pop() { return (c.pop_back()); }
 
