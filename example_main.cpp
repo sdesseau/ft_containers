@@ -70,35 +70,35 @@ int main()
 	// v4.push_back(72);
     // printVec(v4);
 
-    ft::vector<VECTYPE> v1;
-	ft::vector<VECTYPE> v2(4, "caca");
-	v1 = v2;
-	ft::vector<VECTYPE> v3(v1.begin(),v1.end());
-	ft::vector<VECTYPE> v4(v3);
-	printVec(v4);
+    // ft::vector<VECTYPE> v1;
+	// ft::vector<VECTYPE> v2(4, "caca");
+	// v1 = v2;
+	// ft::vector<VECTYPE> v3(v1.begin(),v1.end());
+	// ft::vector<VECTYPE> v4(v3);
+	// printVec(v4);
 
-    v4[1] = "65 + 1";
-	v4.at(2) = "65 + 2";
-	v4.front() = "65 + 0";
-	v4.back() = "65 + 3";
-	printVec(v4);
+    // v4[1] = "65 + 1";
+	// v4.at(2) = "65 + 2";
+	// v4.front() = "65 + 0";
+	// v4.back() = "65 + 3";
+	// printVec(v4);
 
-    v4.resize(2);
-    printVec(v4);
-    v4.reserve(200);
-    printVec(v4);
-
-	v4.push_back("72");
-	v4.push_back("72");
-	v4.push_back("72");
-	v4.push_back("72");
-    printVec(v4);
-
-    v4.pop_back();
-	v4.pop_back();
+    // v4.resize(2);
+    // printVec(v4);
+    // v4.reserve(200);
     // printVec(v4);
 
-	v4.clear();
+	// v4.push_back("72");
+	// v4.push_back("72");
+	// v4.push_back("72");
+	// v4.push_back("72");
     // printVec(v4);
+
+    // v4.pop_back();
+	// v4.pop_back();
+    // // printVec(v4);
+
+	// v4.clear();
+    // // printVec(v4);
 
 }

@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/01/30 19:16:49 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/16 15:51:00 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ namespace ft
 
 				const_iterator end() const { return (const_iterator(this->_begin) + _size); }
 
-				reverse_iterator rbegin() { return (iterator(this->_begin) +  _size - 1); }
+				reverse_iterator rbegin() { return (reverse_iterator(this->_begin) +  _size - 1); }
 
-				const_reverse_iterator rbegin() const { return (const_iterator(this->_begin) + _size - 1); }
+				const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->_begin) + _size - 1); }
 
-				reverse_iterator rend() { return (iterator(this->_begin) - 1); }
+				reverse_iterator rend() { return (reverse_iterator(this->_begin) - 1); }
 
-				const_reverse_iterator rend() const { return (const_iterator(this->_begin) - 1); }
+				const_reverse_iterator rend() const { return (const_reverse_iterator(this->_begin) - 1); }
 
 				/* Capacity */
 
