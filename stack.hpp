@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:12:13 by sdesseau          #+#    #+#             */
-/*   Updated: 2023/02/16 15:22:08 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/16 17:09:49 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ namespace ft
         {
             public:
 
+                /* Typedefs */
+                
                 typedef T           value_type;
                 typedef T&          reference;
                 typedef T const &   const_reference;
