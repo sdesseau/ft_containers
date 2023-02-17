@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/02/16 15:58:11 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/17 17:12:43 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,12 @@ namespace ft
                     _ptr = other._ptr;
                     return (*this);
                 }
+
+                Iterator_vec &operator=(const T& other)
+                {
+                    *_ptr = other;
+                    return (*this);
+                }
                 
                 Iterator_vec &operator++()
                 {
@@ -130,8 +136,20 @@ namespace ft
                     _ptr += i;
                     return (*this);
                 }
+
+                Iterator_vec &operator+=(int i)
+                {
+                    _ptr += i;
+                    return (*this);
+                }
     
                 Iterator_vec &operator-(int i)
+                {
+                    _ptr -= i;
+                    return (*this);
+                }
+                
+                Iterator_vec &operator-=(int i)
                 {
                     _ptr -= i;
                     return (*this);
@@ -148,6 +166,13 @@ namespace ft
                 friend difference_type	operator-(const Iterator_vec& a, const Iterator_vec& b)
                 {
                     return (a._ptr - b._ptr);
+                }
+
+                Iterator_vec operator[](int i)
+                {
+                    Iterator_vec tmp(*this);
+                    tmp._ptr += i;
+                    return (tmp);
                 }
                 
                 bool operator==(const Iterator_vec &other) const { return (_ptr == other._ptr); }

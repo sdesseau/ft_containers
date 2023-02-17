@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/02/16 15:51:00 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/17 17:04:26 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,8 @@ namespace ft
 
 				void assign (size_type n, const value_type& val)
 				{
+					while (this->size())
+						pop_back();
 					while (n != 0)
 					{
 						push_back(val);
@@ -316,6 +318,7 @@ namespace ft
 				{
 					iterator it = end();
 					vector tmp(position, it);
+					iterator ret = position;
 
 					while (it != position)
 					{
@@ -323,7 +326,6 @@ namespace ft
 						it--;
 					}
 					it = tmp.begin() + 1;
-					iterator ret = it;
 					while (it != tmp.end())
 					{
 						push_back(*it);
@@ -336,6 +338,7 @@ namespace ft
 				{
 					iterator it = end();
 					vector tmp(last, end());
+					iterator ret = first;
 					
 					while (it != first)
 					{
@@ -343,7 +346,6 @@ namespace ft
 						it--;
 					}
 					it = tmp.begin();
-					iterator ret = it;
 					while (it != tmp.end())
 					{
 						push_back(*it);
