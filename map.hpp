@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:06:27 by stan              #+#    #+#             */
-/*   Updated: 2023/02/16 17:34:27 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/18 18:20:25 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "iterator.hpp"
 #include <memory>
-#include "AVL.hpp"
+#include "RandBTree.hpp"
 
 namespace ft
 {
@@ -35,10 +35,14 @@ namespace ft
 				typedef typename allocator_type::const_reference            const_reference;
 				typedef typename allocator_type::pointer                    pointer;
 				typedef typename allocator_type::const_pointer              const_pointer;
-                typedef Iterator_map<bidirectional_iterator_tag, T>         iterator;
-				typedef Iterator_map<bidirectional_iterator_tag, T>         const_iterator;
-				typedef RevIterator_map<bidirectional_iterator_tag, T>      reverse_iterator;        
-				typedef RevIterator_map<bidirectional_iterator_tag, T>      const_reverse_iterator;
+                typedef Tree<value_type, Compare, Alloc>                    tree;
+                typedef Tree<const value_type, Compare, Alloc>              const_tree;
+                typedef typename Tree::node                                 Node;
+                typedef typename Tree::value_compare                        value_compare;
+                typedef Iterator_map<bidirectional_iterator_tag, tree>         iterator;
+				typedef Iterator_map<bidirectional_iterator_tag, const_tree, tree>         const_iterator;
+				typedef RevIterator_map<bidirectional_iterator_tag, T, tree>      reverse_iterator;        
+				typedef RevIterator_map<bidirectional_iterator_tag, T, const tree, tree>      const_reverse_iterator;
 
                 /* Member functions */
                 
@@ -134,20 +138,20 @@ namespace ft
         /* Non-member functions */
 
         template< class Key, class T, class Compare, class Alloc >
-            bool operator==( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+            bool operator==( const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs );
 
         template< class Key, class T, class Compare, class Alloc >
-            bool operator!=( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+            bool operator!=( const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs );
 
         template< class Key, class T, class Compare, class Alloc >
-            bool operator<( const std::map<Key, T, Compare, Alloc>& lhs,const std::map<Key, T, Compare, Alloc>& rhs );
+            bool operator<( const map<Key, T, Compare, Alloc>& lhs,const map<Key, T, Compare, Alloc>& rhs );
 
         template< class Key, class T, class Compare, class Alloc >
-            bool operator<=( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+            bool operator<=( const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs );
 
         template< class Key, class T, class Compare, class Alloc >
-            bool operator>( const std::map<Key, T, Compare, Alloc>& lhs,const std::map<Key, T, Compare, Alloc>& rhs );
+            bool operator>( const map<Key, T, Compare, Alloc>& lhs,const map<Key, T, Compare, Alloc>& rhs );
 
         template< class Key, class T, class Compare, class Alloc >
-            bool operator>=( const std::map<Key, T, Compare, Alloc>& lhs, const std::map<Key, T, Compare, Alloc>& rhs );
+            bool operator>=( const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs );
 }
