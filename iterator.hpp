@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/02/17 17:12:43 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:59:31 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ namespace ft
         };
 
     template <class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>
-    struct iterator
+        struct iterator
         {
 	    	typedef Category		iterator_category;	
 	    	typedef T		        value_type;	
@@ -84,7 +84,7 @@ namespace ft
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type		difference_type;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			    pointer;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			    reference;
-    
+
     
                 Iterator_vec() : _ptr(NULL) {}
     
@@ -131,10 +131,11 @@ namespace ft
                     return (tmp);
                 }
     
-                Iterator_vec &operator+(int i)
+                Iterator_vec operator+(int i)
                 {
-                    _ptr += i;
-                    return (*this);
+                    Iterator_vec tmp(*this);
+                    tmp._ptr += i;
+                    return (tmp);
                 }
 
                 Iterator_vec &operator+=(int i)
@@ -143,10 +144,11 @@ namespace ft
                     return (*this);
                 }
     
-                Iterator_vec &operator-(int i)
+                Iterator_vec operator-(int i)
                 {
-                    _ptr -= i;
-                    return (*this);
+                    Iterator_vec tmp(*this);
+                    tmp._ptr -= i;
+                    return (tmp);
                 }
                 
                 Iterator_vec &operator-=(int i)
@@ -155,8 +157,13 @@ namespace ft
                     return (*this);
                 }
     
-                T &operator*() {return (*_ptr);}
-                T *operator->() {return (&(operator*)());}
+                reference operator*() const {return (*_ptr);}
+                pointer operator->() const {return (&(operator*)());}
+
+                friend Iterator_vec operator+(int lhs, const Iterator_vec& rhs)
+	            {
+	            	return Iterator_vec(rhs._ptr + lhs);
+	            }
     
                 friend Iterator_vec	operator-(difference_type n, const Iterator_vec& it) 
                 {
@@ -183,7 +190,7 @@ namespace ft
                 bool operator<(const Iterator_vec &other) const { return (_ptr < other._ptr); }
         };
     
-    template <class Category, class T, class Distance = ptrdiff_t, class Reference = T&, class Pointer = T*>
+    template <class Category, class T, bool constness = false, class Distance = ptrdiff_t, class Reference = T&, class Pointer = T*>
         class RevIterator_vec
         {
             private:
@@ -268,3 +275,4 @@ namespace ft
                 bool operator<(const RevIterator_vec &other) const { return (_ptr < other._ptr); }
         };
 }
+

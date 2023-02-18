@@ -3,7 +3,7 @@
 #include "utils.hpp"
 #include <vector>
 #include <list>
-#include "containers_test/srcs/base.hpp"
+#include "container_tester_mli/srcs/base.hpp"
 
 #define TESTED_TYPE foo<int>
 #define TESTED_NAMESPACE std
@@ -48,13 +48,13 @@ void	printVec(ft::vector<T> v){
     std::cout << std::endl;
 }
 
-void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
-					TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator const &it)
-{
-	static int i = 0;
-	std::cout << "[" << i++ << "] " << "erase: " << it - vct.begin() << std::endl;
-	printSize(vct);
-}
+// void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
+// 					TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator const &it)
+// {
+// 	static int i = 0;
+// 	std::cout << "[" << i++ << "] " << "erase: " << it - vct.begin() << std::endl;
+// 	printSize(vct);
+// }
 
 // void test_assign()
 // {
@@ -219,6 +219,7 @@ void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
 // 	prepost_incdec(vct);
 
 // 	it = it + 5;
+//     it = 1 + it;
 // 	it = it - 4;
 // 	std::cout << *(it += 2) << std::endl;
 // 	std::cout << *(it -= 1) << std::endl;
@@ -236,47 +237,73 @@ void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
 // 	printSize(vct, true);
 // }
 
-void test_ite_arrow()
-{
-	const int size = 5;
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator it(vct.begin());
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite(vct.end());
+// template <typename Ite_1, typename Ite_2>
+// void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
+// {
+// 	std::cout << "ft_eq_ope :" << std::endl;
+// 	std::cout << "first -> " << *first << " ; second -> " << *second << std::endl;
+// 	std::cout << "<    " << (first < second) << std::endl;
+// 	std::cout << "<=   " << (first <= second) << std::endl;
+// 	std::cout << ">    " << (first > second) << std::endl;
+// 	std::cout << "<=   " << (first >= second) << std::endl;
+// 	if (redo)
+// 		ft_eq_ope(second, first, 0);
+// 	std::cout << std::endl;
+// }
 
-	for (int i = 1; it != ite; ++i)
-		*it++ = i;
-	printSize(vct, 1);
+// void test_ite_eq_ope()
+// {
+// 	const int size = 5;
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_0(vct.begin());
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_1(vct.end());
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_mid;
 
-	it = vct.begin();
-	ite = vct.begin();
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit_0 = vct.begin();
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit_1;
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit_mid;
 
-	std::cout << *(++ite) << std::endl;
-	std::cout << *(ite++) << std::endl;
-	std::cout << *ite++ << std::endl;
-	std::cout << *++ite << std::endl;
+// 	for (int i = size; it_0 != it_1; --i)
+// 		*it_0++ = i;
+// 	printSize(vct, 1);
+// 	it_0 = vct.begin();
+// 	// std::cout << "it_0 -> " << *it_0 << std::endl;
+// 	// for (int i = 0; i != size; i++)
+// 	// 	std::cout << "i -> " << i << " ; it_0 -> " << *(it_0 + i) << std::endl;
+// 	cit_1 = vct.end();
+// 	// std::cout << "cit_0 -> " << *cit_0 << std::endl;
+// 	it_mid = it_0 + 3;
+// 	// std::cout << "it_mid -> " << *it_mid << std::endl;
+// 	cit_mid = it_0 + 3;
+// 	// std::cout << "cit_mid -> " << *cit_mid << " ; (it_0 + 3) -> " << (*it_0 + 3) << std::endl;
+// 	it_0 = it_0 + 3; 
+// 	// std::cout << " ; (it_0 + 3) -> " << *it_0 << std::endl;
+// 	cit_mid = cit_0 + 3;
+// 	// std::cout << "cit_mid -> " << *cit_mid << std::endl;
+// 	cit_mid = it_mid;
+// 	// std::cout << "cit_mid -> " << *cit_mid << std::endl;
 
-	it->m();
-	ite->m();
+// 	std::cout << std::boolalpha;
+// 	std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
 
-	std::cout << *(++it) << std::endl;
-	std::cout << *(it++) << std::endl;
-	std::cout << *it++ << std::endl;
-	std::cout << *++it << std::endl;
+// 	std::cout << "\t\tft_eq_ope:" << std::endl;
+// 	// regular it
+// 	ft_eq_ope(it_0 + 3, it_mid);
+// 	ft_eq_ope(it_0, it_1);
+// 	ft_eq_ope(it_1 - 3, it_mid);
+// 	// const it
+// 	ft_eq_ope(cit_0 + 3, cit_mid);
+// 	ft_eq_ope(cit_0, cit_1);
+// 	ft_eq_ope(cit_1 - 3, cit_mid);
+// 	// both it
+// 	ft_eq_ope(it_0 + 3, cit_mid);
+// 	ft_eq_ope(it_mid, cit_0 + 3);
+// 	ft_eq_ope(it_0, cit_1);
+// 	ft_eq_ope(it_1, cit_0);
+// 	ft_eq_ope(it_1 - 3, cit_mid);
+// 	ft_eq_ope(it_mid, cit_1 - 3);
 
-	std::cout << *(--ite) << std::endl;
-	std::cout << *(ite--) << std::endl;
-	std::cout << *--ite << std::endl;
-	std::cout << *ite-- << std::endl;
-
-	(*it).m();
-	(*ite).m();
-
-	std::cout << *(--it) << std::endl;
-	std::cout << *(it--) << std::endl;
-	std::cout << *it-- << std::endl;
-	std::cout << *--it << std::endl;
-
-}
+// }
 
 
 int main()
@@ -286,6 +313,8 @@ int main()
     // test_size();
     // test_erase();
     // test_ite();
-    test_ite_arrow();
-    return (0);
+	// test_ite_eq_ope();
+
+
+	return (0);
 }
