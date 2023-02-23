@@ -6,116 +6,96 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/02/21 18:31:11 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/23 19:33:06 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include "iterator_utils.hpp"
 #include <cstddef>
 
 namespace ft
 {
-
-    struct input_iterator_tag {};
-
-    struct output_iterator_tag {};
-
-    struct forward_iterator_tag : public input_iterator_tag {};
-
-    struct bidirectional_iterator_tag : public forward_iterator_tag {};
-
-    struct random_access_iterator_tag : public bidirectional_iterator_tag {};
-
-    template <class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>
-        struct iterator_traits
-        {
-	    	typedef Category		iterator_category;	
-	    	typedef T		        value_type;	
-	    	typedef Distance		difference_type;	
-	    	typedef Pointer		    pointer;	
-	    	typedef Reference		reference;
-        };
-    
-    template <class Category, class T, class Distance = ptrdiff_t, class Reference = T&, class Pointer = T*>
-        class Iterator_vec : public ft::iterator_traits<ft::random_access_iterator_tag, T>
+    template <class Category, class T >
+        class Iterator : public ft::iterator<ft::random_access_iterator_tag, T>
         {
             private:
                 T *_ptr;
             public:
-                typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
-	    	    typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::value_type		    value_type;	
-	    	    typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::difference_type		difference_type;	
-	    	    typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::pointer			    pointer;	
-	    	    typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::reference			    reference;
+                typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
+	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type		    value_type;	
+	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type		difference_type;	
+	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			    pointer;	
+	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			    reference;
 
     
-                Iterator_vec() : _ptr(NULL) {}
+                Iterator() : _ptr(NULL) {}
     
-                Iterator_vec(T *ptr) : _ptr(ptr) {}
+                Iterator(T *ptr) : _ptr(ptr) {}
     
-                Iterator_vec(const Iterator_vec &other) : _ptr(other._ptr) {}
+                Iterator(const Iterator &other) : _ptr(other._ptr) {}
     
-                ~Iterator_vec() {}
+                ~Iterator() {}
     
-                Iterator_vec &operator=(const Iterator_vec& other)
+                Iterator &operator=(const Iterator& other)
                 {
                     _ptr = other._ptr;
                     return (*this);
                 }
 
-                Iterator_vec &operator=(const T& other)
+                Iterator &operator=(const T& other)
                 {
                     *_ptr = other;
                     return (*this);
                 }
                 
-                Iterator_vec &operator++()
+                Iterator &operator++()
                 {
                     _ptr++;
                     return (*this);
                 }
     
-                Iterator_vec &operator--()
+                Iterator &operator--()
                 {
                     _ptr--;
                     return (*this);
                 }
     
-                Iterator_vec operator++(int)
+                Iterator operator++(int)
                 {
-                    Iterator_vec tmp(*this);
+                    Iterator tmp(*this);
                     _ptr++;
                     return (tmp);
                 }
-                Iterator_vec operator--(int)
+                Iterator operator--(int)
                 {
-                    Iterator_vec tmp(*this);
+                    Iterator tmp(*this);
                     _ptr--;
                     return (tmp);
                 }
     
-                Iterator_vec operator+(int i)
+                Iterator operator+(int i)
                 {
-                    Iterator_vec tmp(*this);
+                    Iterator tmp(*this);
                     tmp._ptr += i;
                     return (tmp);
                 }
 
-                Iterator_vec &operator+=(int i)
+                Iterator &operator+=(int i)
                 {
                     _ptr += i;
                     return (*this);
                 }
     
-                Iterator_vec operator-(int i)
+                Iterator operator-(int i)
                 {
-                    Iterator_vec tmp(*this);
+                    Iterator tmp(*this);
                     tmp._ptr -= i;
                     return (tmp);
                 }
                 
-                Iterator_vec &operator-=(int i)
+                Iterator &operator-=(int i)
                 {
                     _ptr -= i;
                     return (*this);
@@ -124,99 +104,99 @@ namespace ft
                 reference operator*() const {return (*_ptr);}
                 pointer operator->() const {return (&(operator*)());}
 
-                friend Iterator_vec operator+(int lhs, const Iterator_vec& rhs)
+                friend Iterator operator+(int lhs, const Iterator& rhs)
 	            {
-	            	return Iterator_vec(rhs._ptr + lhs);
+	            	return Iterator(rhs._ptr + lhs);
 	            }
 
-                friend difference_type operator+(const Iterator_vec& a, const Iterator_vec& b)
+                friend difference_type operator+(const Iterator& a, const Iterator& b)
                 {
                     return (a._ptr - b._ptr);
                 }
-                friend Iterator_vec	operator-(difference_type n, const Iterator_vec& it) 
+                friend Iterator	operator-(difference_type n, const Iterator& it) 
                 {
-                    return (Iterator_vec(it._ptr - n));
+                    return (Iterator(it._ptr - n));
                 }
     
-                friend difference_type operator-(const Iterator_vec& a, const Iterator_vec& b)
+                friend difference_type operator-(const Iterator& a, const Iterator& b)
                 {
                     return (a._ptr - b._ptr);
                 }
 
-                Iterator_vec operator[](int i)
+                Iterator operator[](int i)
                 {
-                    Iterator_vec tmp(*this);
+                    Iterator tmp(*this);
                     tmp._ptr += i;
                     return (tmp);
                 }
                 
-                bool operator==(const Iterator_vec &other) const { return (_ptr == other._ptr); }
-                bool operator!=(const Iterator_vec &other) const { return (_ptr != other._ptr); }
-                bool operator>=(const Iterator_vec &other) const { return (_ptr >= other._ptr); }
-                bool operator<=(const Iterator_vec &other) const { return (_ptr <= other._ptr); }
-                bool operator>(const Iterator_vec &other) const { return (_ptr > other._ptr); }
-                bool operator<(const Iterator_vec &other) const { return (_ptr < other._ptr); }
+                bool operator==(const Iterator &other) const { return (_ptr == other._ptr); }
+                bool operator!=(const Iterator &other) const { return (_ptr != other._ptr); }
+                bool operator>=(const Iterator &other) const { return (_ptr >= other._ptr); }
+                bool operator<=(const Iterator &other) const { return (_ptr <= other._ptr); }
+                bool operator>(const Iterator &other) const { return (_ptr > other._ptr); }
+                bool operator<(const Iterator &other) const { return (_ptr < other._ptr); }
         };
     
-    template <class Category, class T, class Distance = ptrdiff_t, class Reference = T&, class Pointer = T*>
-        class RevIterator_vec : public ft::iterator_traits<ft::random_access_iterator_tag, T>
+    template <class Category, class T >
+        class RevIterator : public ft::iterator<ft::random_access_iterator_tag, T>
         {
             private:
                 T *_ptr;
             public:
-                typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
-	    	    typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::value_type		    value_type;	
-	    	    typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::difference_type		difference_type;	
-	    	    typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::pointer			    pointer;	
-	    	    typedef typename ft::iterator_traits<ft::random_access_iterator_tag, T>::reference			    reference;
+                typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
+	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type		    value_type;	
+	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type		difference_type;	
+	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			    pointer;	
+	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			    reference;
     
     
-                RevIterator_vec() : _ptr(NULL) {}
+                RevIterator() : _ptr(NULL) {}
     
-                RevIterator_vec(T *ptr) : _ptr(ptr) {}
+                RevIterator(T *ptr) : _ptr(ptr) {}
     
-                RevIterator_vec(const RevIterator_vec &other) : _ptr(other._ptr) {}
+                RevIterator(const RevIterator &other) : _ptr(other._ptr) {}
     
-                ~RevIterator_vec() {}
+                ~RevIterator() {}
     
-                RevIterator_vec& operator=(const RevIterator_vec& other)
+                RevIterator& operator=(const RevIterator& other)
                 {
                     _ptr = other._ptr;
                     return (*this);
                 }
                 
-                RevIterator_vec &operator++()
+                RevIterator &operator++()
                 {
                     _ptr--;
                     return (*this);
                 }
     
-                RevIterator_vec &operator--()
+                RevIterator &operator--()
                 {
                     _ptr++;
                     return (*this);
                 }
     
-                RevIterator_vec operator++(int)
+                RevIterator operator++(int)
                 {
-                    RevIterator_vec tmp(*this);
+                    RevIterator tmp(*this);
                     _ptr--;
                     return tmp;
                 }
-                RevIterator_vec operator--(int)
+                RevIterator operator--(int)
                 {
-                    RevIterator_vec tmp(*this);
+                    RevIterator tmp(*this);
                     _ptr++;
                     return tmp;
                 }
     
-                RevIterator_vec &operator+(int i)
+                RevIterator &operator+(int i)
                 {
                     _ptr += i;
                     return (*this);
                 }
     
-                RevIterator_vec &operator-(int i)
+                RevIterator &operator-(int i)
                 {
                     _ptr -= i;
                     return (*this);
@@ -224,23 +204,29 @@ namespace ft
     
                 T &operator*() {return (*_ptr);}
                 T *operator->() {return (&(operator*)());}
+
+                // needed for conversion to a const_iterator
+		        operator			RevIterator<random_access_iterator_tag, const T>(void)
+		        {
+		        	return (RevIterator<random_access_iterator_tag, const T>(_ptr));
+		        }
     
-                friend RevIterator_vec	operator-(difference_type n, const RevIterator_vec& it) 
+                friend RevIterator	operator-(difference_type n, const RevIterator& it) 
                 {
-                    return (RevIterator_vec(it._ptr - n));
+                    return (RevIterator(it._ptr - n));
                 }
     
-                friend difference_type	operator-(const RevIterator_vec& a, const RevIterator_vec& b)
+                friend difference_type	operator-(const RevIterator& a, const RevIterator& b)
                 {
                     return (a._ptr - b._ptr);
                 }
     
-                bool operator==(const RevIterator_vec &other) const { return (_ptr == other._ptr); }
-                bool operator!=(const RevIterator_vec &other) const { return (_ptr != other._ptr); }
-                bool operator>=(const RevIterator_vec &other) const { return (_ptr >= other._ptr); }
-                bool operator<=(const RevIterator_vec &other) const { return (_ptr <= other._ptr); }
-                bool operator>(const RevIterator_vec &other) const { return (_ptr > other._ptr); }
-                bool operator<(const RevIterator_vec &other) const { return (_ptr < other._ptr); }
+                bool operator==(const RevIterator &other) const { return (_ptr == other._ptr); }
+                bool operator!=(const RevIterator &other) const { return (_ptr != other._ptr); }
+                bool operator>=(const RevIterator &other) const { return (_ptr >= other._ptr); }
+                bool operator<=(const RevIterator &other) const { return (_ptr <= other._ptr); }
+                bool operator>(const RevIterator &other) const { return (_ptr > other._ptr); }
+                bool operator<(const RevIterator &other) const { return (_ptr < other._ptr); }
         };
 }
 

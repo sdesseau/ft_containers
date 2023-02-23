@@ -6,13 +6,14 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:06:27 by stan              #+#    #+#             */
-/*   Updated: 2023/02/21 17:48:29 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/23 19:27:03 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "iterator.hpp"
+#include "iterator_map.hpp"
 #include <memory>
 #include "RandBTree.hpp"
 
@@ -25,24 +26,41 @@ namespace ft
 
                 /* Typedefs */
 
-                typedef Key                                                 key_type;
-                typedef T                                                   mapped_type;
-                typedef ft::pair<key_type, mapped_type>                     value_type;
-                typedef Alloc                                               allocator_type;
-                typedef size_t                                              size_type;
-                typedef Compare                                             key_compare;
-                typedef typename allocator_type::reference                  reference;
-				typedef typename allocator_type::const_reference            const_reference;
-				typedef typename allocator_type::pointer                    pointer;
-				typedef typename allocator_type::const_pointer              const_pointer;
-                typedef Tree<value_type, Compare, Alloc>                    tree;
-                typedef Tree<const value_type, Compare, Alloc>              const_tree;
-                typedef typename Tree::node                                 Node;
-                typedef typename Tree::value_compare                        value_compare;
-                typedef Iterator_map<bidirectional_iterator_tag, tree>         iterator;
-				typedef Iterator_map<bidirectional_iterator_tag, const_tree, tree>         const_iterator;
-				typedef RevIterator_map<bidirectional_iterator_tag, T, tree>      reverse_iterator;        
-				typedef RevIterator_map<bidirectional_iterator_tag, T, const_tree, tree>      const_reverse_iterator;
+                // typedef Key                                                 key_type;
+                // typedef T                                                   mapped_type;
+                // typedef ft::pair<key_type, mapped_type>                     value_type;
+                // typedef Alloc                                               allocator_type;
+                // typedef size_t                                              size_type;
+                // typedef Compare                                             key_compare;
+                // typedef typename allocator_type::reference                  reference;
+				// typedef typename allocator_type::const_reference            const_reference;
+				// typedef typename allocator_type::pointer                    pointer;
+				// typedef typename allocator_type::const_pointer              const_pointer;
+                // typedef Tree<value_type, Compare, Alloc>                    tree;
+                // typedef Tree<const value_type, Compare, Alloc>              const_tree;
+                // typedef typename Tree::node                                 Node;
+                // typedef typename Tree::value_compare                        value_compare;
+                // typedef Iterator_map<bidirectional_iterator_tag, tree>         iterator;
+				// typedef Iterator_map<bidirectional_iterator_tag, const_tree, tree>         const_iterator;
+				// typedef RevIterator_map<bidirectional_iterator_tag, T, tree>      reverse_iterator;        
+				// typedef RevIterator_map<bidirectional_iterator_tag, T, const_tree, tree>      const_reverse_iterator;
+
+                typedef Key                                          key_type;
+		typedef T                                            mapped_type;
+		typedef ft::pair<const key_type, mapped_type>        value_type;
+		typedef Compare                                      key_compare;
+		typedef Alloc                                        allocator_type;
+		typedef typename allocator_type::reference           reference;
+		typedef typename allocator_type::const_reference     const_reference;
+		typedef typename allocator_type::pointer             pointer;
+		typedef typename allocator_type::const_pointer       const_pointer;
+		typedef typename allocator_type::size_type           size_type;
+		typedef typename allocator_type::difference_type     difference_type;
+
+		typedef ft::iterator_map<value_type, ft::Node<value_type> >        iterator;
+		typedef ft::iterator_map<const value_type, ft::Node<value_type> >  const_iterator;
+		typedef ft::RevIterator<iterator>                              reverse_iterator;
+		typedef ft::RevIterator<const_iterator>                        const_reverse_iterator;
 
                 /* Member functions */
                 

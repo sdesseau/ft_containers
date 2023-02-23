@@ -19,46 +19,81 @@
 
 namespace ft
 {
-    template <class T, class Compare = std::less<typename T::first_type>, class Alloc = std::allocator<T>>
+    template < class T >
+    struct Node
+    {
+        public:
+		typedef T              value_type;
+		typedef size_t         size_type;
+
+		Node(void) :
+			val(),
+			color(black),
+			parent(NULL),
+			left(NULL),
+			right(NULL)
+		{}
+
+		Node(value_type const& val,
+			 int color = black,
+			 Node* parent = NULL,
+			 Node* left = NULL,
+			 Node* right = NULL) :
+				val(val),
+				color(color),
+				parent(parent),
+				left(left),
+				right(right)
+		{}
+
+		Node(Node const& src) :
+			 val(src.val),
+			 color(src.color),
+			 parent(src.parent),
+			 left(src.left),
+			 right(src.right)
+		{}
+
+		~Node() {}
+
+		Node&	operator=(Node const& rhs)
+		{
+			if (this == &rhs)
+				return (*this);
+
+			val = rhs.val;
+			color = rhs.color;
+			parent = rhs.parent;
+			left = rhs.left;
+			right = rhs.right;
+			return (*this);
+		}
+
+		bool	operator==(Node const& rhs) { return (val == rhs.val); }
+	
+	public:
+		value_type	data;
+		int	        color;
+		Node		*parent;
+		Node		*left;
+		Node		*right;
+    };
+
+    template < class T, class Compare = std::less<typename T::first_type>, class Alloc = std::allocator<T> >
         class Tree
         {
-            typedef Alloc                       allocator_type;
-            typedef T                           value_type;
-            typedef typename T::first_type      key_type;
-            typedef typename T::second_type     mapped_type;
-            typedef Compare                     key_compare;
-            typedef ptrdiff_t                   difference_type;
-            typedef size_t                      size_type;
-            typedef T                           &reference;
-            typedef T                           *pointer;
-
-            stuct Node
-            {
-                    value_type  data;                       // -> containing the key and the value
-                    Node        *parent;                    // pointer on the parent node (nullptr if root)
-                    Node        *left;                      // pointer to left child
-                    Node        *right;                     // pointer to right child
-                    int         height;                    // height of the node (used for balancing)
-                    int         color;                      // color of the node (red or black)
-
-                    Node *min()                             // return the minimum node of the subtree
-                    {
-                        Node *cur = this;
-                        while (cur->left != nullptr)
-                            cur = cur->left;
-                        return cur;
-                    }
-
-                    Node *max()                             // return the maximum node of the subtree
-                    {
-                        Node *cur = this;
-                        while (cur->right != nullptr)
-                            cur = cur->right;
-                        return cur;
-                    }
-            };
 
             public:
+                typedef Alloc                       allocator_type;
+                typedef T                           value_type;
+                typedef typename T::first_type      key_type;
+                typedef typename T::second_type     mapped_type;
+                typedef Compare                     key_compare;
+                typedef ptrdiff_t                   difference_type;
+                typedef size_t                      size_type;
+                typedef T                           &reference;
+                typedef T                           *pointer;
+
 
                
 
@@ -70,7 +105,6 @@ namespace ft
                         _allocValue.construct(&node->pair, pair);
                         node->left = NULL;
                         node->right = NULL;
-                        node->height = 1;
                         node->parent = parent;
                         node->color = red;
                         return (node);
@@ -78,9 +112,6 @@ namespace ft
 
                     Node*                   _root;
                     Node*                   _end_node;
-                    allocator_type          _allocValue;
-                    std::allocator<Node>    _allocNode;
-                    size_type               _size;
                     key_compare             _comp;
         };
 }

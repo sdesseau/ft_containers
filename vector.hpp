@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/02/18 18:03:00 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/23 19:33:13 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ namespace ft
 				typedef typename allocator_type::const_reference                   const_reference;
 				typedef typename allocator_type::pointer                           pointer;
 				typedef typename allocator_type::const_pointer                     const_pointer;
-				typedef Iterator_vec<random_access_iterator_tag, T>                iterator;
-				typedef Iterator_vec<random_access_iterator_tag, T>                const_iterator;
-				typedef RevIterator_vec<random_access_iterator_tag, T>             reverse_iterator;        
-				typedef RevIterator_vec<random_access_iterator_tag, T>             const_reverse_iterator;
+				typedef Iterator<random_access_iterator_tag, T>                iterator;
+				typedef Iterator<random_access_iterator_tag, T>                const_iterator;
+				typedef RevIterator<random_access_iterator_tag, T>             reverse_iterator;        
+				typedef RevIterator<random_access_iterator_tag, T>             const_reverse_iterator;
 				typedef typename std::ptrdiff_t								       difference_type; 
 
 				/* Member functions */
