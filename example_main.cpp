@@ -94,25 +94,25 @@ void	printVec(ft::vector<T> v){
 // 	printSize(vct_two);
 // }
 
-void test_bidirect_it()
-{
-    TESTED_NAMESPACE::vector<TESTED_TYPE> lst;
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator lst_it;
-	for (int i = 1; i < 5; ++i)
-		lst.push_back(i * 3);
+// void test_bidirect_it()
+// {
+//     TESTED_NAMESPACE::vector<TESTED_TYPE> lst;
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator lst_it;
+// 	for (int i = 1; i < 5; ++i)
+// 		lst.push_back(i * 3);
 
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(lst.begin(), lst.end());
-	printSize(vct);
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(lst.begin(), lst.end());
+// 	printSize(vct);
 
-	lst_it = lst.begin();
-	for (int i = 1; lst_it != lst.end(); ++i)
-		*lst_it++ = i * 5;
-	vct.assign(lst.begin(), lst.end());
-	printSize(vct);
+// 	lst_it = lst.begin();
+// 	for (int i = 1; lst_it != lst.end(); ++i)
+// 		*lst_it++ = i * 5;
+// 	vct.assign(lst.begin(), lst.end());
+// 	printSize(vct);
 
-	vct.insert(vct.end(), lst.rbegin(), lst.rend());
-	printSize(vct);
-}
+// 	vct.insert(vct.end(), lst.rbegin(), lst.rend());
+// 	printSize(vct);
+// }
 
 // void test_size()
 // {
@@ -237,73 +237,133 @@ void test_bidirect_it()
 // 	printSize(vct, true);
 // }
 
+// template <typename Ite_1, typename Ite_2>
+// void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
+// {
+// 	std::cout << "ft_eq_ope :" << std::endl;
+// 	// std::cout << "first -> " << *first << " ; second -> " << *second << std::endl;
+// 	std::cout << "<    " << (first < second) << std::endl;
+// 	std::cout << "<=   " << (first <= second) << std::endl;
+// 	std::cout << ">    " << (first > second) << std::endl;
+// 	std::cout << "<=   " << (first >= second) << std::endl;
+// 	if (redo)
+// 		ft_eq_ope(second, first, 0);
+// 	std::cout << std::endl;
+// }
+
+// void test_ite_eq_ope()
+// {
+// 	const int size = 5;
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator begin(vct.begin());
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_1(vct.end());
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_mid;
+
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit_0 = vct.begin();
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit_1;
+// 	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit_mid;
+
+// 	for (int i = size; it_0 != it_1; --i)
+// 		*it_0++ = i;
+// 	printSize(vct, 1);
+// 	it_0 = vct.begin();
+// 	std::cout << "it_0 -> " << *it_0 << std::endl;
+// 	for (int i = 0; i != size; i++)
+// 		std::cout << "i -> " << i << " ; it_0 -> " << *(it_0 + i) << std::endl;
+// 	cit_1 = vct.end();
+// 	// std::cout << "cit_0 -> " << *cit_0 << std::endl;
+// 	it_mid = it_0 + 3;
+// 	// std::cout << "it_mid -> " << *it_mid << std::endl;
+// 	cit_mid = it_0 + 3;
+// 	// std::cout << "cit_mid -> " << *cit_mid << " ; (it_0 + 3) -> " << (*it_0 + 3) << std::endl;
+// 	it_0 = it_0 + 3; 
+// 	// std::cout << " ; (it_0 + 3) -> " << *it_0 << std::endl;
+// 	cit_mid = cit_0 + 3;
+// 	// std::cout << "cit_mid -> " << *cit_mid << std::endl;
+// 	cit_mid = it_mid;
+// 	// std::cout << "cit_mid -> " << *cit_mid << std::endl;
+
+// 	std::cout << std::boolalpha;
+// 	std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
+
+// 	std::cout << "\t\tft_eq_ope:" << std::endl;
+// 	// regular it
+// 	ft_eq_ope(it_0 + 3, it_mid);
+// 	ft_eq_ope(it_0, it_1);
+// 	ft_eq_ope(it_1 - 3, it_mid);
+// 	// const it
+// 	ft_eq_ope(cit_0 + 3, cit_mid);
+// 	ft_eq_ope(cit_0, cit_1);
+// 	ft_eq_ope(cit_1 - 3, cit_mid);
+// 	// both it
+// 	ft_eq_ope(it_0 + 3, cit_mid);
+// 	ft_eq_ope(it_mid, cit_0 + 3);
+// 	ft_eq_ope(it_0, cit_1);
+// 	ft_eq_ope(it_1, cit_0);
+// 	ft_eq_ope(it_1 - 3, cit_mid);
+// 	ft_eq_ope(it_mid, cit_1 - 3);
+
+// }
+
 template <typename Ite_1, typename Ite_2>
 void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
 {
-	std::cout << "ft_eq_ope :" << std::endl;
-	std::cout << "first -> " << *first << " ; second -> " << *second << std::endl;
-	std::cout << "<    " << (first < second) << std::endl;
-	std::cout << "<=   " << (first <= second) << std::endl;
-	std::cout << ">    " << (first > second) << std::endl;
-	std::cout << "<=   " << (first >= second) << std::endl;
+	// std::cout << "first -> " << *first << " ; second -> " << *second << std::endl;
+	std::cout << (first < second) << std::endl;
+	std::cout << (first <= second) << std::endl;
+	std::cout << (first > second) << std::endl;
+	std::cout << (first >= second) << std::endl;
 	if (redo)
 		ft_eq_ope(second, first, 0);
-	std::cout << std::endl;
 }
 
-void test_ite_eq_ope()
+void test_rev_it()
 {
 	const int size = 5;
 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_0(vct.begin());
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_1(vct.end());
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it_mid;
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator begin(vct.rbegin());
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator end(vct.rend());
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator middle;
 
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit_0 = vct.begin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit_1;
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit_mid;
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cbegin = vct.rbegin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cend;
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cmiddle;
 
-	for (int i = size; it_0 != it_1; --i)
-		*it_0++ = i;
+	for (int i = size; begin != end; --i)
+		*begin++ = i;
 	printSize(vct, 1);
-	it_0 = vct.begin();
-	// std::cout << "it_0 -> " << *it_0 << std::endl;
-	// for (int i = 0; i != size; i++)
-	// 	std::cout << "i -> " << i << " ; it_0 -> " << *(it_0 + i) << std::endl;
-	cit_1 = vct.end();
-	// std::cout << "cit_0 -> " << *cit_0 << std::endl;
-	it_mid = it_0 + 3;
-	// std::cout << "it_mid -> " << *it_mid << std::endl;
-	cit_mid = it_0 + 3;
-	// std::cout << "cit_mid -> " << *cit_mid << " ; (it_0 + 3) -> " << (*it_0 + 3) << std::endl;
-	it_0 = it_0 + 3; 
-	// std::cout << " ; (it_0 + 3) -> " << *it_0 << std::endl;
-	cit_mid = cit_0 + 3;
-	// std::cout << "cit_mid -> " << *cit_mid << std::endl;
-	cit_mid = it_mid;
-	// std::cout << "cit_mid -> " << *cit_mid << std::endl;
+	begin = vct.rbegin();
+	cend = vct.rend();
+	middle = begin + 3;
+	cmiddle = begin + 3; cmiddle = cbegin + 3; cmiddle = middle;
+
+	std::cout << "########################" << std::endl;
+	std::cout << *begin << " = begin , " << *middle << " = middle , " << *end << " = end;" << std::endl;
+	std::cout << *cbegin << " = cbegin , " << *cmiddle << " = cmiddle , " << *cend << " = cend;" << std::endl;
+	std::cout << "########################" << std::endl;
 
 	std::cout << std::boolalpha;
-	std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
+	std::cout << ((begin + 3 == cbegin + 3) && (cbegin + 3 == middle)) << std::endl;
 
 	std::cout << "\t\tft_eq_ope:" << std::endl;
 	// regular it
-	ft_eq_ope(it_0 + 3, it_mid);
-	ft_eq_ope(it_0, it_1);
-	ft_eq_ope(it_1 - 3, it_mid);
+	ft_eq_ope(begin + 3, middle);
+	ft_eq_ope(begin, end);
+	ft_eq_ope(end - 3, middle);
 	// const it
-	ft_eq_ope(cit_0 + 3, cit_mid);
-	ft_eq_ope(cit_0, cit_1);
-	ft_eq_ope(cit_1 - 3, cit_mid);
-	// both it
-	ft_eq_ope(it_0 + 3, cit_mid);
-	ft_eq_ope(it_mid, cit_0 + 3);
-	ft_eq_ope(it_0, cit_1);
-	ft_eq_ope(it_1, cit_0);
-	ft_eq_ope(it_1 - 3, cit_mid);
-	ft_eq_ope(it_mid, cit_1 - 3);
+	ft_eq_ope(cbegin + 3, cmiddle);
+	ft_eq_ope(cbegin, cend);
+	ft_eq_ope(cend - 3, cmiddle);
+	// // both it
+	ft_eq_ope(begin + 3, cmiddle);
+	ft_eq_ope(middle, cbegin + 3);
+	ft_eq_ope(begin, cend);
+	ft_eq_ope(end, cbegin);
+	ft_eq_ope(end - 3, cmiddle);
+	ft_eq_ope(middle, cend - 3);
 
 }
+
 
 
 int main()
@@ -313,7 +373,20 @@ int main()
     // test_size();
     // test_erase();
     // test_ite();
-	test_ite_eq_ope();
+	// test_ite_eq_ope();
+	// test_rev_it();
+
+	// TESTED_NAMESPACE::vector<TESTED_TYPE> vct;
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator cit = vct.begin();
+
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator rit(it);
+
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit(rit);
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit_(it);
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator crit_2(cit);
+
+
 
 
 	return (0);

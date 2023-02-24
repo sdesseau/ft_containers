@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/02/23 19:33:06 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/24 16:06:06 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 namespace ft
 {
-    template <class Category, class T >
+    template <class T >
         class Iterator : public ft::iterator<ft::random_access_iterator_tag, T>
         {
             private:
@@ -37,6 +37,8 @@ namespace ft
                 Iterator(const Iterator &other) : _ptr(other._ptr) {}
     
                 ~Iterator() {}
+
+                pointer getptr() const { return (_ptr); }
     
                 Iterator &operator=(const Iterator& other)
                 {
@@ -104,6 +106,12 @@ namespace ft
                 reference operator*() const {return (*_ptr);}
                 pointer operator->() const {return (&(operator*)());}
 
+                // needed for conversion to a const_iterator
+	        	operator				Iterator<const T>(void)
+	        	{
+	        		return Iterator<const T>(_ptr);
+	        	}
+
                 friend Iterator operator+(int lhs, const Iterator& rhs)
 	            {
 	            	return Iterator(rhs._ptr + lhs);
@@ -111,7 +119,7 @@ namespace ft
 
                 friend difference_type operator+(const Iterator& a, const Iterator& b)
                 {
-                    return (a._ptr - b._ptr);
+                    return (a._ptr + b._ptr);
                 }
                 friend Iterator	operator-(difference_type n, const Iterator& it) 
                 {
@@ -130,15 +138,28 @@ namespace ft
                     return (tmp);
                 }
                 
-                bool operator==(const Iterator &other) const { return (_ptr == other._ptr); }
-                bool operator!=(const Iterator &other) const { return (_ptr != other._ptr); }
-                bool operator>=(const Iterator &other) const { return (_ptr >= other._ptr); }
-                bool operator<=(const Iterator &other) const { return (_ptr <= other._ptr); }
-                bool operator>(const Iterator &other) const { return (_ptr > other._ptr); }
-                bool operator<(const Iterator &other) const { return (_ptr < other._ptr); }
         };
+
+    template <class IteratorL, class IteratorR>
+        bool operator==(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
+        { return (otherL.getptr() == otherR.getptr()); }
+    template <class IteratorL, class IteratorR>
+        bool operator!=(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
+        { return (otherL.getptr() != otherR.getptr()); }
+    template <class IteratorL, class IteratorR>
+        bool operator>=(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
+        { return (otherL.getptr() >= otherR.getptr()); }
+    template <class IteratorL, class IteratorR>
+        bool operator<=(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
+        { return (otherL.getptr() <= otherR.getptr()); }
+    template <class IteratorL, class IteratorR>
+        bool operator>(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
+        { return (otherL.getptr() > otherR.getptr()); }
+    template <class IteratorL, class IteratorR>
+        bool operator<(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
+        { return (otherL.getptr() < otherR.getptr()); }
     
-    template <class Category, class T >
+    template <class T >
         class RevIterator : public ft::iterator<ft::random_access_iterator_tag, T>
         {
             private:
@@ -151,17 +172,25 @@ namespace ft
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			    reference;
     
     
-                RevIterator() : _ptr(NULL) {}
+               RevIterator() : _ptr(NULL) {}
     
                 RevIterator(T *ptr) : _ptr(ptr) {}
     
                 RevIterator(const RevIterator &other) : _ptr(other._ptr) {}
     
                 ~RevIterator() {}
+
+                pointer getptr() const { return (_ptr); }
     
-                RevIterator& operator=(const RevIterator& other)
+                RevIterator &operator=(const RevIterator& other)
                 {
                     _ptr = other._ptr;
+                    return (*this);
+                }
+
+                RevIterator &operator=(const T& other)
+                {
+                    *_ptr = other;
                     return (*this);
                 }
                 
@@ -181,52 +210,94 @@ namespace ft
                 {
                     RevIterator tmp(*this);
                     _ptr--;
-                    return tmp;
+                    return (tmp);
                 }
                 RevIterator operator--(int)
                 {
                     RevIterator tmp(*this);
                     _ptr++;
-                    return tmp;
+                    return (tmp);
                 }
     
-                RevIterator &operator+(int i)
+                RevIterator operator+(int i)
                 {
-                    _ptr += i;
-                    return (*this);
+                    RevIterator tmp(*this);
+                    tmp._ptr -= i;
+                    return (tmp);
                 }
-    
-                RevIterator &operator-(int i)
+
+                RevIterator &operator+=(int i)
                 {
                     _ptr -= i;
                     return (*this);
                 }
     
-                T &operator*() {return (*_ptr);}
-                T *operator->() {return (&(operator*)());}
-
-                // needed for conversion to a const_iterator
-		        operator			RevIterator<random_access_iterator_tag, const T>(void)
-		        {
-		        	return (RevIterator<random_access_iterator_tag, const T>(_ptr));
-		        }
+                RevIterator operator-(int i)
+                {
+                    RevIterator tmp(*this);
+                    tmp._ptr += i;
+                    return (tmp);
+                }
+                
+                RevIterator &operator-=(int i)
+                {
+                    _ptr += i;
+                    return (*this);
+                }
     
+                reference operator*() const {return (*_ptr);}
+                pointer operator->() const {return (&(operator*()));}
+
+                // needed for conversion to a const_Reviterator
+	        	operator				RevIterator<const T>(void)
+	        	{
+	        		return RevIterator<const T>(_ptr);
+	        	}
+
+                friend RevIterator operator+(int lhs, const RevIterator& rhs)
+	            {
+	            	return RevIterator(rhs._ptr + lhs);
+	            }
+
+                friend difference_type operator+(const RevIterator& a, const RevIterator& b)
+                {
+                    return (a._ptr - b._ptr);
+                }
                 friend RevIterator	operator-(difference_type n, const RevIterator& it) 
                 {
                     return (RevIterator(it._ptr - n));
                 }
     
-                friend difference_type	operator-(const RevIterator& a, const RevIterator& b)
+                friend difference_type operator-(const RevIterator& a, const RevIterator& b)
                 {
                     return (a._ptr - b._ptr);
                 }
     
-                bool operator==(const RevIterator &other) const { return (_ptr == other._ptr); }
-                bool operator!=(const RevIterator &other) const { return (_ptr != other._ptr); }
-                bool operator>=(const RevIterator &other) const { return (_ptr >= other._ptr); }
-                bool operator<=(const RevIterator &other) const { return (_ptr <= other._ptr); }
-                bool operator>(const RevIterator &other) const { return (_ptr > other._ptr); }
-                bool operator<(const RevIterator &other) const { return (_ptr < other._ptr); }
+                RevIterator operator[](int i)
+                {
+                    RevIterator tmp(*this);
+                    tmp._ptr -= i;
+                    return (tmp);
+                }
         };
+
+        template <class IteratorL, class IteratorR>
+            bool operator==(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
+            { return (otherL.getptr() == otherR.getptr()); }
+        template <class IteratorL, class IteratorR>
+            bool operator!=(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
+            { return (otherL.getptr() != otherR.getptr()); }
+        template <class IteratorL, class IteratorR>
+            bool operator>=(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
+            { return (otherL.getptr() <= otherR.getptr()); }
+        template <class IteratorL, class IteratorR>
+            bool operator<=(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
+            { return (otherL.getptr() >= otherR.getptr()); }
+        template <class IteratorL, class IteratorR>
+            bool operator>(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
+            { return (otherL.getptr() < otherR.getptr()); }
+        template <class IteratorL, class IteratorR>
+            bool operator<(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
+            { return (otherL.getptr() > otherR.getptr()); }
 }
 

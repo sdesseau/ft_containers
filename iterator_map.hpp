@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:58:15 by stan              #+#    #+#             */
-/*   Updated: 2023/02/23 19:05:52 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/23 21:20:08 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ namespace ft
         
         		~iterator_map() {}
         
-        		node_pointer		get_ptrrent(void) const { return (_ptr); }
+        		node_pointer		get_ptr(void) const { return (_ptr); }
         
         		reference			operator*() const { return (_ptr->val); }
         
@@ -156,13 +156,11 @@ namespace ft
         };
 
         template <class IteratorL, class IteratorR, class _Node>
-            bool	operator==(iterator_map<IteratorL, _Node> const& x,
-            				   iterator_map<IteratorR, _Node> const& y)
-            { return (x.get_ptrrent() == y.get_ptrrent()); }
+            bool	operator==(iterator_map<IteratorL, _Node> const& x, iterator_map<IteratorR, _Node> const& y)
+            { return (x.get_ptr() == y.get_ptr()); }
         
         template <class IteratorL, class IteratorR, class _Node>
-            bool	operator!=(iterator_map<IteratorL, _Node> const& x,
-            				   iterator_map<IteratorR, _Node> const& y)
-            { return (x.get_ptrrent() != y.get_ptrrent()); }
+            bool	operator!=(iterator_map<IteratorL, _Node> const& x, iterator_map<IteratorR, _Node> const& y)
+            { return (x.get_ptr() != y.get_ptr()); }
 
 }

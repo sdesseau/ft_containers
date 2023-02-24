@@ -27,19 +27,19 @@ namespace ft
 		typedef size_t         size_type;
 
 		Node(void) :
-			val(),
+			data(),
 			color(black),
 			parent(NULL),
 			left(NULL),
 			right(NULL)
 		{}
 
-		Node(value_type const& val,
+		Node(value_type const& data,
 			 int color = black,
 			 Node* parent = NULL,
 			 Node* left = NULL,
 			 Node* right = NULL) :
-				val(val),
+				data(data),
 				color(color),
 				parent(parent),
 				left(left),
@@ -47,7 +47,7 @@ namespace ft
 		{}
 
 		Node(Node const& src) :
-			 val(src.val),
+			 data(src.data),
 			 color(src.color),
 			 parent(src.parent),
 			 left(src.left),
@@ -61,7 +61,7 @@ namespace ft
 			if (this == &rhs)
 				return (*this);
 
-			val = rhs.val;
+			data = rhs.val;
 			color = rhs.color;
 			parent = rhs.parent;
 			left = rhs.left;
