@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:58:15 by stan              #+#    #+#             */
-/*   Updated: 2023/02/23 21:20:08 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/27 13:30:12 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,16 @@ namespace ft
         
         	public:
         		typedef T                                                 value_type;
-        		typedef Node                                              node_type;
-        		typedef Node*                                             node_pointer;
+        		typedef Node*                                             node;
         		typedef iterator<bidirectional_iterator_tag, value_type>  iterator_type;
         		typedef typename iterator_type::iterator_category         iterator_category;
         		typedef typename iterator_type::difference_type           difference_type;
         		typedef typename iterator_type::pointer                   pointer;
         		typedef typename iterator_type::reference                 reference;
         
-        
-        	public:
         		iterator_map(void) : _begin(NULL), _end(NULL), _ptr(NULL) {}
         
-        		iterator_map(node_pointer const& begin, node_pointer const& end, node_pointer const& current) :
+        		iterator_map(node const& begin, node const& end, node const& current) :
         			_begin(begin),
         			_end(end),
         			_ptr(current)
@@ -55,9 +52,9 @@ namespace ft
         
         		~iterator_map() {}
         
-        		node_pointer		get_ptr(void) const { return (_ptr); }
+        		node		get_ptr(void) const { return (_ptr); }
         
-        		reference			operator*() const { return (_ptr->val); }
+        		reference			operator*() const { return (_ptr->data); }
         
         		pointer				operator->() const { return (&(operator*())); }
         
@@ -105,26 +102,29 @@ namespace ft
         		// needed for conversion to a const_iterator
         		operator			iterator_map<const T, Node> (void) { return (iterator_map<const T, Node>(_begin, _end, _ptr)); }
         
-        
         	private:
-        		node_pointer	min(node_pointer s)
+        		node	_begin;
+        		node	_end;
+        		node	_ptr;
+
+                node	min(node s)
         		{
         			for ( ; s->left != _end; s = s->left);
         			return (s);
         		}
         
-        		node_pointer	max(node_pointer s)
+        		node	max(node s)
         		{
         			for ( ; s->right != _end; s = s->right);
         			return (s);
         		}
         
-        		node_pointer	successor(node_pointer s)
+        		node	successor(node s)
         		{
         			if (s->right != _end)
         				return (min(s->right));
         
-        			node_pointer	tmp = s->parent;
+        			node	tmp = s->parent;
         			while (tmp != _end && s == tmp->right)
         			{
         				s = tmp;
@@ -133,12 +133,12 @@ namespace ft
         			return (tmp);
         		}
         
-        		node_pointer	predecessor(node_pointer s)
+        		node	predecessor(node s)
         		{
         			if (s->left != _end)
         				return (max(s->left));
         
-        			node_pointer	tmp = s->parent;
+        			node	tmp = s->parent;
         			while (tmp != _end && s == tmp->left)
         			{
         				s = tmp;
@@ -146,13 +146,6 @@ namespace ft
         			}
         			return (tmp);
         		}
-        
-        
-        	private:
-        		node_pointer	_begin;
-        		node_pointer	_end;
-        		node_pointer	_ptr;
-        
         };
 
         template <class IteratorL, class IteratorR, class _Node>

@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/02/24 16:06:06 by stan             ###   ########.fr       */
+/*   Updated: 2023/02/24 17:20:56 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 namespace ft
 {
     template <class T >
-        class Iterator : public ft::iterator<ft::random_access_iterator_tag, T>
+        class Iterator : public iterator<ft::random_access_iterator_tag, T>
         {
             private:
                 T *_ptr;
@@ -38,7 +38,7 @@ namespace ft
     
                 ~Iterator() {}
 
-                pointer getptr() const { return (_ptr); }
+                pointer base() const { return (_ptr); }
     
                 Iterator &operator=(const Iterator& other)
                 {
@@ -142,27 +142,27 @@ namespace ft
 
     template <class IteratorL, class IteratorR>
         bool operator==(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.getptr() == otherR.getptr()); }
+        { return (otherL.base() == otherR.base()); }
     template <class IteratorL, class IteratorR>
         bool operator!=(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.getptr() != otherR.getptr()); }
+        { return (otherL.base() != otherR.base()); }
     template <class IteratorL, class IteratorR>
         bool operator>=(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.getptr() >= otherR.getptr()); }
+        { return (otherL.base() >= otherR.base()); }
     template <class IteratorL, class IteratorR>
         bool operator<=(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.getptr() <= otherR.getptr()); }
+        { return (otherL.base() <= otherR.base()); }
     template <class IteratorL, class IteratorR>
         bool operator>(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.getptr() > otherR.getptr()); }
+        { return (otherL.base() > otherR.base()); }
     template <class IteratorL, class IteratorR>
         bool operator<(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.getptr() < otherR.getptr()); }
+        { return (otherL.base() < otherR.base()); }
     
     template <class T >
         class RevIterator : public ft::iterator<ft::random_access_iterator_tag, T>
         {
-            private:
+            protected:
                 T *_ptr;
             public:
                 typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
@@ -175,12 +175,14 @@ namespace ft
                RevIterator() : _ptr(NULL) {}
     
                 RevIterator(T *ptr) : _ptr(ptr) {}
+
+                RevIterator(const Iterator<T> &other) : _ptr(other.base()) {}
     
                 RevIterator(const RevIterator &other) : _ptr(other._ptr) {}
     
                 ~RevIterator() {}
 
-                pointer getptr() const { return (_ptr); }
+                pointer base() const { return (_ptr); }
     
                 RevIterator &operator=(const RevIterator& other)
                 {
@@ -244,7 +246,7 @@ namespace ft
                     _ptr += i;
                     return (*this);
                 }
-    
+
                 reference operator*() const {return (*_ptr);}
                 pointer operator->() const {return (&(operator*()));}
 
@@ -283,21 +285,21 @@ namespace ft
 
         template <class IteratorL, class IteratorR>
             bool operator==(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.getptr() == otherR.getptr()); }
+            { return (otherL.base() == otherR.base()); }
         template <class IteratorL, class IteratorR>
             bool operator!=(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.getptr() != otherR.getptr()); }
+            { return (otherL.base() != otherR.base()); }
         template <class IteratorL, class IteratorR>
             bool operator>=(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.getptr() <= otherR.getptr()); }
+            { return (otherL.base() <= otherR.base()); }
         template <class IteratorL, class IteratorR>
             bool operator<=(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.getptr() >= otherR.getptr()); }
+            { return (otherL.base() >= otherR.base()); }
         template <class IteratorL, class IteratorR>
             bool operator>(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.getptr() < otherR.getptr()); }
+            { return (otherL.base() < otherR.base()); }
         template <class IteratorL, class IteratorR>
             bool operator<(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.getptr() > otherR.getptr()); }
+            { return (otherL.base() > otherR.base()); }
 }
 
