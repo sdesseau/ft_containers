@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:10:05 by stan              #+#    #+#             */
-/*   Updated: 2023/02/27 15:19:33 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/02 16:42:58 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ namespace ft
 
 	template <class T>
 		struct is_integral { static const bool value = false; };
+	
 	template <>
 		struct is_integral<bool> { static const bool value = true; };
 	template <>

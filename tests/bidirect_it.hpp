@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:02:33 by stan              #+#    #+#             */
-/*   Updated: 2023/02/27 15:12:44 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/02 17:01:25 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void test_bidirect_it()
 {
-    TESTED_NAMESPACE::vector<TESTED_TYPE> lst;
+	TESTED_NAMESPACE::vector<TESTED_TYPE> lst;
 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator lst_it;
 	for (int i = 1; i < 5; ++i)
 		lst.push_back(i * 3);

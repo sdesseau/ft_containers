@@ -6,14 +6,14 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:58:20 by stan              #+#    #+#             */
-/*   Updated: 2023/03/02 16:11:01 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/02 20:39:40 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #define TESTED_TYPE int
-#define TESTED_NAMESPACE ft
+#define TESTED_NAMESPACE std
 
 #define T1 int
 #define T2 int

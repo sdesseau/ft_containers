@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/03/01 16:01:26 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/02 17:08:55 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ namespace ft
     template <class T >
         class Iterator : public iterator<ft::random_access_iterator_tag, T>
         {
-            private:
-                T *_ptr;
+            
             public:
                 typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type		    value_type;	
@@ -35,14 +34,16 @@ namespace ft
     
                 Iterator(T *ptr) : _ptr(ptr) {}
     
-                Iterator(const Iterator &other) : _ptr(other.base()) {}
+                Iterator(const Iterator& other) : _ptr(other.base()) {}
     
                 ~Iterator() {}
 
                 pointer base() const { return (_ptr); }
     
-                Iterator &operator=(const Iterator& other)
+                Iterator& operator=(const Iterator& other)
                 {
+        			if (this == &other)
+        				return (*this);
                     _ptr = other.base();
                     return (*this);
                 }
@@ -109,28 +110,19 @@ namespace ft
 
                 // needed for conversion to a const_iterator
 	        	operator				Iterator<const T>(void)
-	        	{
-	        		return Iterator<const T>(_ptr);
-	        	}
+	        	{ return Iterator<const T>(_ptr); }
 
                 friend Iterator operator+(int lhs, const Iterator& rhs)
-	            {
-	            	return Iterator(rhs._ptr + lhs);
-	            }
+	            { return Iterator(rhs._ptr + lhs); }
 
                 friend difference_type operator+(const Iterator& a, const Iterator& b)
-                {
-                    return (a._ptr + b._ptr);
-                }
+                { return (a._ptr + b._ptr); }
+                
                 friend Iterator	operator-(difference_type n, const Iterator& it) 
-                {
-                    return (Iterator(it._ptr - n));
-                }
-    
+                { return (Iterator(it._ptr - n)); }
+
                 friend difference_type operator-(const Iterator& a, const Iterator& b)
-                {
-                    return (a._ptr - b._ptr);
-                }
+                { return (a._ptr - b._ptr); }
 
                 Iterator operator[](int i)
                 {
@@ -138,6 +130,9 @@ namespace ft
                     tmp._ptr += i;
                     return (tmp);
                 }
+                
+            private:
+                T *_ptr;
         };
 
     template <class IteratorL, class IteratorR>

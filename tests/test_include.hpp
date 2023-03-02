@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:46:12 by stan              #+#    #+#             */
-/*   Updated: 2023/02/27 14:56:55 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/02 19:48:08 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,7 @@
 #include "rev_it.hpp"
 #include "map_cpyconstruct.hpp"
 #include "construct_hard.hpp"
+#include "bounds.hpp"
+#include "insert.hpp"
+#include "erase_map.hpp"
+#include "ite_map.hpp"
