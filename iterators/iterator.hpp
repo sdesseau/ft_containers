@@ -6,7 +6,7 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 18:52:06 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:18:08 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,21 +283,17 @@ namespace ft
 
                 friend RevIterator operator+(int lhs, const RevIterator& rhs)
 	            {
-	            	return (RevIterator(rhs._ptr + lhs));
+	            	return (RevIterator(rhs._ptr - lhs));
 	            }
-
-                friend difference_type operator+(const RevIterator& a, const RevIterator& b)
-                {
-                    return (a._ptr - b._ptr);
-                }
+                
                 friend RevIterator	operator-(difference_type n, const RevIterator& it) 
                 {
-                    return (RevIterator(it._ptr - n));
+                    return (RevIterator(it._ptr + n));
                 }
     
                 friend difference_type operator-(const RevIterator& a, const RevIterator& b)
                 {
-                    return (a._ptr - b._ptr);
+                    return (-1 * (a._ptr - b._ptr));
                 }
     
                 RevIterator operator[](int i)
