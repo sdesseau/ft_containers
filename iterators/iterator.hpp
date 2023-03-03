@@ -6,7 +6,7 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 19:18:08 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:20:22 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,23 +179,6 @@ namespace ft
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type		difference_type;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			    pointer;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			    reference;
-
-                // RevIterator()                    : _ptr() {}
-		// explicit RevIterator(T x) : _ptr(x) {}
-
-		// template <class U>
-		// RevIterator(const RevIterator<U>& u) : _ptr(u.getPtr()) {}
-
-		// template <class U>
-		// RevIterator&	operator=(const RevIterator<U>& other)
-		// {
-		// 	if (*this == other)
-		// 		return *this;
-			
-		// 	_ptr = other.getPtr();
-		// 	return *this;
-		// }
-
 
                 RevIterator() : _ptr(NULL) {}
     
