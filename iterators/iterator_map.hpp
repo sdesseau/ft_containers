@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator_map.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:58:15 by stan              #+#    #+#             */
-/*   Updated: 2023/03/02 19:34:11 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/03 18:51:41 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ namespace ft
         
         		~iterator_map() {}
         
-        		node		base(void) const { return (_ptr); }
+        		node		getPtr() const { return (_ptr); }
+
+				iterator_map base() const { return (this); }
         
         		reference			operator*() const { return (_ptr->data); }
         
@@ -153,11 +155,11 @@ namespace ft
 
         template <class IteratorL, class IteratorR, class _Node>
             bool	operator==(iterator_map<IteratorL, _Node> const& x, iterator_map<IteratorR, _Node> const& y)
-            { return (x.base() == y.base()); }
+            { return (x.getPtr() == y.getPtr()); }
         
         template <class IteratorL, class IteratorR, class _Node>
             bool	operator!=(iterator_map<IteratorL, _Node> const& x, iterator_map<IteratorR, _Node> const& y)
-            { return (x.base() != y.base()); }
+            { return (x.getPtr() != y.getPtr()); }
 
 
 		template <class T, class Node>
@@ -199,7 +201,9 @@ namespace ft
         
         		~reviterator_map() {}
         
-        		node		base(void) const { return (_ptr); }
+        		node		getPtr(void) const { return (_ptr); }
+
+				reviterator_map base() const { return (this); }
         
         		reference			operator*() const { return (_ptr->data); }
         
@@ -303,11 +307,11 @@ namespace ft
 
         template <class IteratorL, class IteratorR, class _Node>
             bool	operator==(reviterator_map<IteratorL, _Node> const& x, reviterator_map<IteratorR, _Node> const& y)
-            { return (x.base() == y.base()); }
+            { return (x.getPtr() == y.getPtr()); }
         
         template <class IteratorL, class IteratorR, class _Node>
             bool	operator!=(reviterator_map<IteratorL, _Node> const& x, reviterator_map<IteratorR, _Node> const& y)
-            { return (x.base() != y.base()); }
+            { return (x.getPtr() != y.getPtr()); }
 
 
 }

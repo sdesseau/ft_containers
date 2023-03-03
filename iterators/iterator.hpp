@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/03/02 17:08:55 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/03 18:52:06 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,19 @@ namespace ft
     
                 Iterator(T *ptr) : _ptr(ptr) {}
     
-                Iterator(const Iterator& other) : _ptr(other.base()) {}
+                Iterator(const Iterator& other) : _ptr(other.getPtr()) {}
     
                 ~Iterator() {}
 
-                pointer base() const { return (_ptr); }
+                pointer getPtr() const { return (_ptr); }
+
+				Iterator base() const { return (this); }
     
                 Iterator& operator=(const Iterator& other)
                 {
         			if (this == &other)
         				return (*this);
-                    _ptr = other.base();
+                    _ptr = other.getPtr();
                     return (*this);
                 }
 
@@ -137,27 +139,27 @@ namespace ft
 
     template <class IteratorL, class IteratorR>
         bool operator==(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.base() == otherR.base()); }
+        { return (otherL.getPtr() == otherR.getPtr()); }
 
     template <class IteratorL, class IteratorR>
         bool operator!=(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.base() != otherR.base()); }
+        { return (otherL.getPtr() != otherR.getPtr()); }
         
     template <class IteratorL, class IteratorR>
         bool operator>=(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.base() >= otherR.base()); }
+        { return (otherL.getPtr() >= otherR.getPtr()); }
 
     template <class IteratorL, class IteratorR>
         bool operator<=(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.base() <= otherR.base()); }
+        { return (otherL.getPtr() <= otherR.getPtr()); }
 
     template <class IteratorL, class IteratorR>
         bool operator>(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.base() > otherR.base()); }
+        { return (otherL.getPtr() > otherR.getPtr()); }
         
     template <class IteratorL, class IteratorR>
         bool operator<(const Iterator<IteratorL> &otherL, const Iterator<IteratorR> &otherR)
-        { return (otherL.base() < otherR.base()); }
+        { return (otherL.getPtr() < otherR.getPtr()); }
 
 
 
@@ -182,7 +184,7 @@ namespace ft
 		// explicit RevIterator(T x) : _ptr(x) {}
 
 		// template <class U>
-		// RevIterator(const RevIterator<U>& u) : _ptr(u.base()) {}
+		// RevIterator(const RevIterator<U>& u) : _ptr(u.getPtr()) {}
 
 		// template <class U>
 		// RevIterator&	operator=(const RevIterator<U>& other)
@@ -190,7 +192,7 @@ namespace ft
 		// 	if (*this == other)
 		// 		return *this;
 			
-		// 	_ptr = other.base();
+		// 	_ptr = other.getPtr();
 		// 	return *this;
 		// }
 
@@ -199,15 +201,17 @@ namespace ft
     
                 RevIterator(T *ptr) : _ptr(ptr) {}
 
-                RevIterator(const Iterator<T> &other) : _ptr(other.base()) {}
+                RevIterator(const Iterator<T> &other) : _ptr(other.getPtr()) {}
     
-                RevIterator(const RevIterator &other) : _ptr(other.base()) {}
+                RevIterator(const RevIterator &other) : _ptr(other.getPtr()) {}
 
-                pointer base() const { return (_ptr); }
+                pointer getPtr() const { return (_ptr); }
+
+				RevIterator base() const { return (this); }
     
                 RevIterator &operator=(const RevIterator& other)
                 {
-                    _ptr = other.base();
+                    _ptr = other.getPtr();
                     return (*this);
                 }
 
@@ -306,26 +310,26 @@ namespace ft
 
         template <class IteratorL, class IteratorR>
             bool operator==(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.base() == otherR.base()); }
+            { return (otherL.getPtr() == otherR.getPtr()); }
 
         template <class IteratorL, class IteratorR>
             bool operator!=(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.base() != otherR.base()); }
+            { return (otherL.getPtr() != otherR.getPtr()); }
 
         template <class IteratorL, class IteratorR>
             bool operator>=(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.base() <= otherR.base()); }
+            { return (otherL.getPtr() <= otherR.getPtr()); }
 
         template <class IteratorL, class IteratorR>
             bool operator<=(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.base() >= otherR.base()); }
+            { return (otherL.getPtr() >= otherR.getPtr()); }
 
         template <class IteratorL, class IteratorR>
             bool operator>(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.base() < otherR.base()); }
+            { return (otherL.getPtr() < otherR.getPtr()); }
             
         template <class IteratorL, class IteratorR>
             bool operator<(const RevIterator<IteratorL> &otherL, const RevIterator<IteratorR> &otherR)
-            { return (otherL.base() > otherR.base()); }
+            { return (otherL.getPtr() > otherR.getPtr()); }
 }
 

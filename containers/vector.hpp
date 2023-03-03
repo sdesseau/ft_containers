@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/02 17:32:55 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/03 18:16:52 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ namespace ft
 
 				size_type size() const { return (_size); }
 
-				size_type max_size() const { return (std::min((size_type)std::numeric_limits<std::ptrdiff_t>::max(), std::numeric_limits<size_type>::max() / sizeof(value_type))); }
+				size_type max_size() const { return (allocator_type().max_size()); }
 
 				void resize (size_type n, value_type val = value_type())
 				{

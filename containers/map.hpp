@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:06:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/02 20:18:21 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/03 18:17:51 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,15 @@ namespace ft
                 /* Member functions */
                 
                 explicit map(const key_compare& comp = key_compare()
-                        , __unused const allocator_type& alloc = allocator_type()) :
-                            _tree(value_compare(comp)) {}
+                        , const allocator_type& alloc = allocator_type()) :
+                            _tree(value_compare(comp)) { (void)alloc; }
 
                 template< class InputIterator >
                     map(InputIterator first, InputIterator last,
-                        const key_compare& comp = key_compare(), __unused const allocator_type& alloc = allocator_type(),
+                        const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),
                         typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
                             : _tree(value_compare(comp))
-                    { insert(first, last); }
+                    { (void)alloc; insert(first, last); }
 
                 map( const map& other ) : _tree(value_compare(key_compare()))
                 { insert(other.begin(), other.end()); }
@@ -150,8 +150,9 @@ namespace ft
                     return (ft::make_pair(find(value.first), ret));
                 }
 
-                iterator insert(__unused const iterator pos, const value_type& value)
+                iterator insert(const iterator pos, const value_type& value)
                 {
+                    (void)pos;
                     insert(value);
                     return (find(value.first));
                 }

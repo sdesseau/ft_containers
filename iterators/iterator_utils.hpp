@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator_utils.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 23:36:04 by stan              #+#    #+#             */
-/*   Updated: 2023/03/02 20:17:47 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/03 18:22:01 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ namespace ft
     template <class T>
         struct iterator_traits<T*>
         {
-        	typedef ptrdiff_t                              difference_type;
+        	typedef std::ptrdiff_t                         difference_type;
         	typedef T                                      value_type;
         	typedef T*                                     pointer;
         	typedef T&                                     reference;
@@ -49,7 +49,7 @@ namespace ft
     template <class T>
         struct iterator_traits<const T*>
         {
-        	typedef ptrdiff_t                              difference_type;
+        	typedef std::ptrdiff_t                         difference_type;
         	typedef T                                      value_type;
         	typedef T*                                     pointer;
         	typedef T&                                     reference;

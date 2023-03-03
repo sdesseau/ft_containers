@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ite_map.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:42:28 by stan              #+#    #+#             */
-/*   Updated: 2023/03/02 20:38:21 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/03 18:20:37 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,15 @@ void test_ite_map()
 	TESTED_NAMESPACE::map<t4, t5> mp;
 	mp[1] = 2;
 
-	__unused TESTED_NAMESPACE::map<t4, t5>::const_iterator ite = mp.begin();
+	TESTED_NAMESPACE::map<t4, t5>::const_iterator ite = mp.begin();
 	// *ite = 42; // < -- error
+	(void)ite;
 
     TESTED_NAMESPACE::map<t4, t5> const mp2;
-	// __unused TESTED_NAMESPACE::map<t4, t5>::iterator it5 = mp2.begin(); // <-- error expected
+	// TESTED_NAMESPACE::map<t4, t5>::iterator ite = mp2.begin(); // <-- error expected
 	
 
-    TESTED_NAMESPACE::map<char, int>::iterator it6;
+    TESTED_NAMESPACE::map<char, int>::iterator it;
 	TESTED_NAMESPACE::map<char, float>::const_iterator ite3;
 
 	// std::cout << (it6 != ite3) << std::endl; // <--- error
@@ -80,8 +81,8 @@ void test_ite_map()
 	TESTED_NAMESPACE::map<t4, t5>::reverse_iterator rit(it4);
 
 	TESTED_NAMESPACE::map<t4, t5>::const_reverse_iterator crit(rit);
-	__unused TESTED_NAMESPACE::map<t4, t5>::const_reverse_iterator crit_(it4);
-	__unused TESTED_NAMESPACE::map<t4, t5>::const_reverse_iterator crit_2(cit);
+	TESTED_NAMESPACE::map<t4, t5>::const_reverse_iterator crit_(it4);
+	TESTED_NAMESPACE::map<t4, t5>::const_reverse_iterator crit_2(cit);
 
     rite();
 }
