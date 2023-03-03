@@ -6,7 +6,7 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 19:20:22 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:21:06 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,20 @@
 
 namespace ft
 {
-    template <class T >
+    template <class T>
         class Iterator : public iterator<ft::random_access_iterator_tag, T>
         {
             
             public:
+
+                /* Typedefs */
+                
                 typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type		    value_type;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type		difference_type;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			    pointer;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			    reference;
 
-    
                 Iterator() : _ptr(NULL) {}
     
                 Iterator(T *ptr) : _ptr(ptr) {}
@@ -110,7 +112,7 @@ namespace ft
                 reference operator*() const {return (*_ptr);}
                 pointer operator->() const {return (&(operator*)());}
 
-                // needed for conversion to a const_iterator
+                // const_iterator
 	        	operator				Iterator<const T>(void)
 	        	{ return Iterator<const T>(_ptr); }
 

@@ -6,7 +6,7 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:58:15 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 18:51:41 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/03 19:21:31 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ namespace ft
 			friend class reviterator_map<T, Node>;
 			
         	public:
+
+				/* Typedefs */
+
         		typedef T                                                 value_type;
         		typedef Node*                                             node;
         		typedef iterator<bidirectional_iterator_tag, value_type>  iterator_type;
@@ -103,7 +106,7 @@ namespace ft
         			return (tmp);
         		}
         
-        		// needed for conversion to a const_iterator
+        		// const_iterator
         		operator			iterator_map<const value_type, Node> ()
 				{ return (iterator_map<const value_type, Node>(_begin, _end, _ptr)); }
         
