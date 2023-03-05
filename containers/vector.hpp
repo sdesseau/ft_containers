@@ -6,7 +6,7 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/05 20:26:27 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:33:29 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ namespace ft
 						_size++;
 						return ;
 					}
-					_capacity *= 2;
+					_capacity = _size + 1;
 					pointer tmp = _alloc.allocate(_capacity);
 					for (size_type i = 0; i < _size; i++)
 					{

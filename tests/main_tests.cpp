@@ -39,22 +39,38 @@ int main()
 	// std::cout << std::endl << "                   New Test" << std::endl;
 	// test_equalrange();
 
-	TESTED_NAMESPACE::vector<char> v3;
-	TESTED_NAMESPACE::vector<char> v4;
-	v4.clear();
-	v3.clear();
-	std::cout << v3.empty() << std::endl;
-	for (TESTED_NAMESPACE::vector<char>::size_type i = 0; i < 7; i++){
-		v4.insert(v4.begin() + i, 'a' + i);
-	printVec(v4);
-		v3.insert(v3.begin() + i, 'A' + i);
-	}
-	v3.insert(v3.begin()+3, 2, 'X');
-	v3.insert(v3.begin()+4, v4.begin(), v4.end());
-	printVec(v3);
-	printVec(v4);
-	v3.swap(v4);
-	printVec(v3);
-	printVec(v4);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(5);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin(), ite = vct.end();
+
+	std::cout << "len: " << (ite - it) << std::endl;
+	for (; it != ite; ++it)
+		*it = (ite - it);
+
+	it = vct.begin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_range(it, --(--ite));
+	for (int i = 0; it != ite; ++it)
+		*it = ++i * 5;
+
+	it = vct.begin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_copy(vct);
+	for (int i = 0; it != ite; ++it)
+		*it = ++i * 7;
+	vct_copy.push_back(42);
+	vct_copy.push_back(21);
+
+	std::cout << "\t-- PART ONE --" << std::endl;
+	printSize(vct);
+	printSize(vct_range);
+	printSize(vct_copy);
+
+	vct = vct_copy;
+	vct_copy = vct_range;
+	vct_range.clear();
+
+	std::cout << "\t-- PART TWO --" << std::endl;
+	printSize(vct);
+	printSize(vct_range);
+	printVec(vct_copy);
+	printSize(vct_copy);
 
 }
