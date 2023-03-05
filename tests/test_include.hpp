@@ -6,7 +6,7 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:46:12 by stan              #+#    #+#             */
-/*   Updated: 2023/03/05 19:01:22 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/05 19:38:19 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include "define.hpp"
 #include <list>
 #include <map>
+#include <stack>
+#include "../containers/stack.hpp"
 
 #include "assign.hpp"
 #include "bidirect_it.hpp"
@@ -36,3 +38,4 @@
 #include "erase_map.hpp"
 #include "ite_map.hpp"
 #include "equal_range.hpp"
+#include "push_top.hpp"

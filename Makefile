@@ -6,13 +6,13 @@
 #    By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/02 20:13:21 by stan              #+#    #+#              #
-#    Updated: 2023/03/03 18:36:55 by sdesseau         ###   ########.fr        #
+#    Updated: 2023/03/05 20:00:15 by sdesseau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	:= container
 CC		:= clang++
-FLAGS	:= -Wall -Werror -Wextra -std=c++98
+FLAGS	:= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -g3
 
 SRCS	:= example_main.cpp
 SRCS_TESTS := tests/main_tests.cpp

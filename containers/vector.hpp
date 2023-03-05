@@ -6,7 +6,7 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/05 17:45:35 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:26:27 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,11 @@ namespace ft
 
 				vector (const vector& x) : _alloc(x._alloc), _capacity(x._size), _size(x._size)
 			    {
-				_begin = _alloc.allocate(x._size);
-				for (size_type i = 0; i < _size; i++)
-					_alloc.construct(&_begin[i], x._begin[i]);
+					_begin = NULL;
+      				_alloc = x._alloc;
+      				_size = 0;
+      				_capacity = 0;
+      				assign(x.begin(), x.end());
 			    }
 
 				~vector()
@@ -106,7 +108,6 @@ namespace ft
 				iterator begin() { return (iterator(this->_begin)); }
 
 				const_iterator begin() const { return (const_iterator(this->_begin)); }
-
 				iterator end() { return (iterator(this->_begin) + _size); }
 
 				const_iterator end() const { return (const_iterator(this->_begin + _size)); }
