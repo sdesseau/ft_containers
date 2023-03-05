@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/05 20:33:29 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/06 00:43:02 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ namespace ft
       				_size = 0;
       				_capacity = 0;
       				assign(x.begin(), x.end());
+					_capacity = _size;
 			    }
 
 				~vector()
@@ -128,6 +129,8 @@ namespace ft
 
 				void resize (size_type n, value_type val = value_type())
 				{
+					// if (n >= max_size() + 1)
+					// 	throw (std::invalid_argument("vector::resize"));
 					while (_size > n)
 						pop_back();
 					if (n > _capacity * 2)
@@ -233,7 +236,7 @@ namespace ft
 						_size++;
 						return ;
 					}
-					_capacity = _size + 1;
+					_capacity *= 2;
 					pointer tmp = _alloc.allocate(_capacity);
 					for (size_type i = 0; i < _size; i++)
 					{
@@ -373,9 +376,7 @@ namespace ft
 				}
 
 				void clear()
-				{
-					resize(0);
-				}
+				{ resize(0); }
 
 				/* Allocator */
 
