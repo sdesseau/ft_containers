@@ -6,14 +6,15 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:58:20 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 19:19:30 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/05 19:02:45 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #define TESTED_TYPE int
-#define TESTED_NAMESPACE ft
+#define TESTED_TYPE2 double
+#define TESTED_NAMESPACE std
 
 #define T1 int
 #define T2 int

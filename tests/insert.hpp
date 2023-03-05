@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insert.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:21:14 by stan              #+#    #+#             */
-/*   Updated: 2023/03/02 19:30:46 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/05 18:08:13 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void insert2()
 
 	TESTED_NAMESPACE::map<t1, t2> mp;
 	ft_insert2(mp, lst.begin(), lst.end());
+
+	mp.at(42);
 
 	lst.clear();
 

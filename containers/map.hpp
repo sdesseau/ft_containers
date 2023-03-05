@@ -6,7 +6,7 @@
 /*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:06:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 18:17:51 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:33:46 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ namespace ft
                         { return (comp(x.first, y.first)); }
 		        };
                 
-                typedef Tree<value_type, value_compare>                             tree;
+                typedef Tree<value_type, value_compare>                              tree;
         
         		typedef ft::iterator_map<value_type, ft::Node<value_type> >          iterator;
         		typedef ft::iterator_map<const value_type, ft::Node<value_type> >    const_iterator;
-        		typedef ft::reviterator_map<value_type, ft::Node<value_type> >        reverse_iterator;
+        		typedef ft::reviterator_map<value_type, ft::Node<value_type> >       reverse_iterator;
         		typedef ft::reviterator_map<const value_type, ft::Node<value_type> > const_reverse_iterator;
 
                 /* Member functions */
@@ -98,15 +98,21 @@ namespace ft
 
                 /* Element Access */
 
-                // mapped_type& at(const key_type& key)
-                // {
-                //     iterator at = find(key);
-                //     if (!at)
-                //         throw std::out_of_range("map::at");
-                //     return ();
-                // }
+                mapped_type& at(const key_type& key)
+                {
+                    iterator at = find(key);
+                    if (at == this->end())
+                        throw std::out_of_range("map::at");
+                    return (at->second);
+                }
 
-                // const mapped_type& at(const key_type& key) const;
+                const mapped_type& at(const key_type& key) const
+                {
+                    const_iterator at = find(key);
+                    if (at == this->end())
+                        throw std::out_of_range("map::at");
+                    return (at->second);
+                }
 
                 T& operator[](const key_type& key)
                 {
@@ -235,7 +241,7 @@ namespace ft
 
         template< class key_type, class mapped_type, class key_compare, class allocator_type >
             bool operator<( const map<key_type, mapped_type, key_compare, allocator_type>& lhs,const map<key_type, mapped_type, key_compare, allocator_type>& rhs )
-            { return (lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end())); }
+            { return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end())); }
 
         template< class key_type, class mapped_type, class key_compare, class allocator_type >
             bool operator<=( const map<key_type, mapped_type, key_compare, allocator_type>& lhs, const map<key_type, mapped_type, key_compare, allocator_type>& rhs )
