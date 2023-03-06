@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:10:30 by stan              #+#    #+#             */
-/*   Updated: 2023/02/27 15:19:49 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:04:12 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,4 @@ namespace ft
 
     template <class T1, class T2>
         ft::pair<T1, T2> make_pair(T1 x, T2 y) { return (ft::pair<T1, T2>(x, y)); }
-
 }

@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:46:12 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 13:41:27 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:02:37 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include "define.hpp"
 #include <list>
 #include <map>
-// #include <stack>
+#include <stack>
 #include "../containers/stack.hpp"
 
 #include "assign.hpp"

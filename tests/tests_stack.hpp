@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:53:35 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 13:42:12 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:02:46 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void tests_stack()
 	}
 	std::cout << '\n';
 
-	// continue with empty, size, top, push, pop, operator =, operator ==, operator !=, operator <, operator <=, operator >, operator >=, copy constructor and destructor 
 	mystack.push(42);
 	mystack.push(21);
 	mystack.push(84);
@@ -46,7 +45,8 @@ void tests_stack()
 	mystack.pop();
 	printf("top: %d\n", mystack.top());
 	printf("empty: %d\n", mystack.empty());
-	// show all operators
+
+	
 	TESTED_NAMESPACE::stack<int> mystack2;
 	mystack2.push(42);
 	mystack2.push(21);

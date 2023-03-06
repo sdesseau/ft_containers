@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:12:13 by sdesseau          #+#    #+#             */
-/*   Updated: 2023/03/06 13:42:33 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 13:47:34 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ namespace ft
         class stack
         {
             public:
-
                 /* Typedefs */
                 
                 typedef T           value_type;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:28:49 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 19:21:06 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:58:14 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ namespace ft
     template <class T>
         class Iterator : public iterator<ft::random_access_iterator_tag, T>
         {
-            
             public:
-
                 /* Typedefs */
                 
                 typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
@@ -32,6 +30,9 @@ namespace ft
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			    pointer;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			    reference;
 
+
+                /* Constructors */
+                
                 Iterator() : _ptr(NULL) {}
     
                 Iterator(T *ptr) : _ptr(ptr) {}
@@ -51,6 +52,9 @@ namespace ft
                     _ptr = other.getPtr();
                     return (*this);
                 }
+
+
+                /* Operators */
 
                 Iterator &operator=(const T& other)
                 {
@@ -108,14 +112,14 @@ namespace ft
                     _ptr -= i;
                     return (*this);
                 }
-    
-                reference operator*() const {return (*_ptr);}
-                pointer operator->() const {return (&(operator*)());}
 
-                // const_iterator
-	        	operator				Iterator<const T>(void)
-	        	{ return Iterator<const T>(_ptr); }
-
+                Iterator operator[](int i)
+                {
+                    Iterator tmp(*this);
+                    tmp._ptr += i;
+                    return (tmp);
+                }
+                
                 friend Iterator operator+(int lhs, const Iterator& rhs)
 	            { return Iterator(rhs._ptr + lhs); }
 
@@ -127,13 +131,15 @@ namespace ft
 
                 friend difference_type operator-(const Iterator& a, const Iterator& b)
                 { return (a._ptr - b._ptr); }
+    
+                reference operator*() const {return (*_ptr);}
+                pointer operator->() const {return (&(operator*)());}
 
-                Iterator operator[](int i)
-                {
-                    Iterator tmp(*this);
-                    tmp._ptr += i;
-                    return (tmp);
-                }
+
+                /* Const Iterator */
+
+	        	operator				Iterator<const T>(void)
+	        	{ return Iterator<const T>(_ptr); }
                 
             private:
                 T *_ptr;
@@ -173,15 +179,18 @@ namespace ft
     template <class T >
         class RevIterator : public ft::iterator<ft::random_access_iterator_tag, T>
         {
-            protected:
-                T *_ptr;
             public:
+                /* Typedefs */
+
                 typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category 	iterator_category;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type		    value_type;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type		difference_type;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::pointer			    pointer;	
 	    	    typedef typename ft::iterator<ft::random_access_iterator_tag, T>::reference			    reference;
 
+
+                /* Constructors */
+                
                 RevIterator() : _ptr(NULL) {}
     
                 RevIterator(T *ptr) : _ptr(ptr) {}
@@ -194,6 +203,9 @@ namespace ft
 
 				RevIterator base() const { return (this); }
     
+    
+                /* Operators */
+                
                 RevIterator &operator=(const RevIterator& other)
                 {
                     _ptr = other.getPtr();
@@ -256,15 +268,13 @@ namespace ft
                     _ptr += i;
                     return (*this);
                 }
-
-                reference operator*() const {return (*_ptr);}
-                pointer operator->() const {return (&(operator*()));}
-
-                // needed for conversion to a const_Reviterator
-	        	operator				RevIterator<const T>(void)
-	        	{
-	        		return (RevIterator<const T>(_ptr));
-	        	}
+    
+                RevIterator operator[](int i)
+                {
+                    RevIterator tmp(*this);
+                    tmp._ptr -= i;
+                    return (tmp);
+                }
 
                 friend RevIterator operator+(int lhs, const RevIterator& rhs)
 	            {
@@ -280,13 +290,20 @@ namespace ft
                 {
                     return (-1 * (a._ptr - b._ptr));
                 }
-    
-                RevIterator operator[](int i)
-                {
-                    RevIterator tmp(*this);
-                    tmp._ptr -= i;
-                    return (tmp);
-                }
+
+                reference operator*() const {return (*_ptr);}
+                pointer operator->() const {return (&(operator*()));}
+
+
+                /* Const Iterator*/
+                
+	        	operator				RevIterator<const T>(void)
+	        	{
+	        		return (RevIterator<const T>(_ptr));
+	        	}
+
+            protected:
+                T *_ptr;
         };
 
         template <class IteratorL, class IteratorR>

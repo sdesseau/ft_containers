@@ -76,7 +76,7 @@ int main()
 	// std::cout << std::endl << "                   New Test::push" << std::endl;
 	// test_push();
 	// std::cout << std::endl << "                   New Test::stack" << std::endl;
-	tests_stack();
+	// tests_stack();
 
 	// // /* Test Map */
 
@@ -99,7 +99,5 @@ int main()
 
 	// test all the tests
 	// test_all(); 
-	
-	return 0;
-
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:06:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 13:25:29 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 13:48:04 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ namespace ft
         class map
         {
             public:
-
                 /* Typedefs */
 
                 typedef Key                                          key_type;
@@ -44,12 +43,10 @@ namespace ft
 		    		friend class map;
                     
 		    		protected:
-
 		    			key_compare comp;
 		    			value_compare (key_compare c) : comp(c) {}
                         
 		    		public:
-                    
 		    			typedef bool		result_type;
 		    			typedef value_type	first_arg_type;
 		    			typedef value_type	second_arg_type;
@@ -64,6 +61,7 @@ namespace ft
         		typedef ft::iterator_map<const value_type, ft::Node<value_type> >    const_iterator;
         		typedef ft::reviterator_map<value_type, ft::Node<value_type> >       reverse_iterator;
         		typedef ft::reviterator_map<const value_type, ft::Node<value_type> > const_reverse_iterator;
+
 
                 /* Member functions */
                 
@@ -95,6 +93,7 @@ namespace ft
 
                 allocator_type get_allocator() const { return (allocator_type()); }
 
+
                 /* Element Access */
 
                 mapped_type& at(const key_type& key)
@@ -119,6 +118,7 @@ namespace ft
                     return (find(key)->second);
                 }
 
+
                 /* Iterators */
 
                 iterator begin() { return (iterator(_tree.getRoot(), _tree.getLast(), _tree.min())); }
@@ -130,6 +130,7 @@ namespace ft
 		        const_reverse_iterator rbegin() const { return (const_reverse_iterator(_tree.getRoot(), _tree.getLast(), _tree.max())); }
 		        reverse_iterator rend() { return (reverse_iterator(_tree.getRoot(), _tree.getLast(), _tree.getLast())); }
 		        const_reverse_iterator rend() const { return (const_reverse_iterator(_tree.getRoot(), _tree.getLast(), _tree.getLast())); }
+
 
                 /* Capacity */
 
@@ -144,6 +145,7 @@ namespace ft
                 size_type size() const { return (_tree.size()); }
 
                 size_type max_size() const { return (_tree.max_size()); }
+
 
                 /* Modifiers */
 
@@ -188,6 +190,7 @@ namespace ft
                 size_type erase( const key_type& key ) { return (_tree.delete_node(ft::make_pair(key, mapped_type()))); }
 
                 void swap(map& other) { _tree.swap(other._tree); }
+
 
                 /* Lookup */
 

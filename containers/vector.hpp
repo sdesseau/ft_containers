@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 13:37:27 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 13:47:25 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ namespace ft
 		class vector
 		{
 			public:
-			
 				/* Typedefs */
 
 				typedef T                                                          value_type;

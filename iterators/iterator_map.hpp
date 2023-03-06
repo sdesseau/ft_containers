@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator_map.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:58:15 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 19:21:31 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:47:16 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ namespace ft
     template <class T, class Node>
         class iterator_map : public iterator<bidirectional_iterator_tag, T>
         {
-
 			friend class reviterator_map<T, Node>;
 			
         	public:
@@ -40,8 +39,7 @@ namespace ft
         		iterator_map(void) : _begin(NULL), _end(NULL), _ptr(NULL) {}
         
         		iterator_map(node const& begin, node const& end, node const& ptr) :
-        			_begin(begin), _end(end), _ptr(ptr)
-        		{}
+        			_begin(begin), _end(end), _ptr(ptr) {}
         
         		iterator_map(iterator_map const& other) { *this = other; }
         
@@ -106,15 +104,13 @@ namespace ft
         			return (tmp);
         		}
         
-        		// const_iterator
+        		/* Const-Iterator */
         		operator			iterator_map<const value_type, Node> ()
 				{ return (iterator_map<const value_type, Node>(_begin, _end, _ptr)); }
-        
-        	private:
-        		node	_begin;
-        		node	_end;
-        		node	_ptr;
 
+
+			private:
+			
                 node	min(node s)
         		{
         			for ( ; s->left != _end; s = s->left);
@@ -154,6 +150,11 @@ namespace ft
         			}
         			return (tmp);
         		}
+        
+        	private:
+        		node	_begin;
+        		node	_end;
+        		node	_ptr;
         };
 
         template <class IteratorL, class IteratorR, class _Node>
@@ -180,8 +181,7 @@ namespace ft
         		reviterator_map(void) : _begin(NULL), _end(NULL), _ptr(NULL) {}
         
         		reviterator_map(node const& begin, node const& end, node const& ptr) :
-        			_begin(begin), _end(end), _ptr(ptr)
-        		{}
+        			_begin(begin), _end(end), _ptr(ptr) {}
 
 				reviterator_map(iterator_map<T, Node> const &ite)
 				{
@@ -258,15 +258,12 @@ namespace ft
         			return (tmp);
         		}
         
-        		// needed for conversion to a const_iterator
+        		/* Const Iterator */
         		operator			reviterator_map<const value_type, Node> ()
 				{ return (reviterator_map<const value_type, Node>(_begin, _end, _ptr)); }
-        
-        	protected:
-        		node	_begin;
-        		node	_end;
-        		node	_ptr;
 
+
+			private:
                 node	min(node s)
         		{
         			for ( ; s->left != _end; s = s->left);
@@ -306,6 +303,11 @@ namespace ft
         			}
         			return (tmp);
         		}
+        
+        	protected:
+        		node	_begin;
+        		node	_end;
+        		node	_ptr;
         };
 
         template <class IteratorL, class IteratorR, class _Node>

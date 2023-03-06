@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:03:02 by stan              #+#    #+#             */
-/*   Updated: 2023/02/27 15:19:01 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:02:29 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void test_rev_it()
 	ft_eq_ope2(cbegin + 3, cmiddle);
 	ft_eq_ope2(cbegin, cend);
 	ft_eq_ope2(cend - 3, cmiddle);
-	// // both it
+	// both it
 	ft_eq_ope2(begin + 3, cmiddle);
 	ft_eq_ope2(middle, cbegin + 3);
 	ft_eq_ope2(begin, cend);

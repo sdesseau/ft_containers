@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator_utils.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 23:36:04 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 18:22:01 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:49:50 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 namespace ft
 {
+	/* Iterator Tags */
+	
     struct input_iterator_tag {};
 
     struct output_iterator_tag {};
@@ -25,7 +27,9 @@ namespace ft
 
     struct random_access_iterator_tag : public bidirectional_iterator_tag {};
 
+
     /* Iterator Traits */
+
     template <class Iterator>
         struct iterator_traits
         {
@@ -68,6 +72,7 @@ namespace ft
         };
 
 
+	/* Lexicographical Compare */
 
     template<class InputIt1, class InputIt2>
     	bool lexicographical_compare(InputIt1 first1, InputIt1 last1,
@@ -82,6 +87,9 @@ namespace ft
     	    }
     	    return ((first1 == last1) && (first2 != last2));
     	}
+
+
+	/* Equal */
 
     template <class InputIt1, class InputIt2>
         bool	equal(InputIt1 first1, InputIt1 last1, InputIt2 first2)

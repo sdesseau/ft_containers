@@ -14,6 +14,7 @@
 
 #include "pair.hpp"
 #include <algorithm>
+
 #define red 1
 #define black 0
 
@@ -23,7 +24,6 @@ namespace ft
     struct Node
     {
         public:
-		
             typedef T              value_type;
 		    typedef size_t         size_type;
 
@@ -71,7 +71,6 @@ namespace ft
         class Tree
         {
             public:
-                
                 /* Typedefs */
                 
                 typedef T                                           value_type;
@@ -85,6 +84,7 @@ namespace ft
                 typedef typename allocator_type::size_type          size_type;
                 typedef typename allocator_type::difference_type    difference_type;
 
+
                 /* Member functions */
                
                 Tree(value_compare const &comp = value_compare()) : _comp(comp)
@@ -95,6 +95,7 @@ namespace ft
                 }
 
                 ~Tree() {}
+
 
                 /* Element Access */
 
@@ -123,23 +124,23 @@ namespace ft
 
                 pointer search(const value_type& key) const { return (recursive_search(_root, key)); }
 
-                pointer successor(pointer node) const           // return le noeud juste au dessus de la node
+                pointer successor(pointer node) const                      // return le noeud juste au dessus de la node
                 {
-                    if (node->right != _end)                    // cas ou la node a un sous-arbre droit
+                    if (node->right != _end)                               // cas ou la node a un sous-arbre droit
                         return (min(node->right));
-                    if (node->parent == NULL || node == max())   // cas ou la node est le max
+                    if (node->parent == NULL || node == max())              // cas ou la node est le max
                         return (_end);
 
                     pointer tmp = node->parent;
-                    while (tmp != _end && node == tmp->right)   // trouver le successeur en remontant
+                    while (tmp != _end && node == tmp->right)              // trouver le successeur en remontant
                     {
                         node = tmp;
                         tmp = tmp->parent;
                     }
-                    return (tmp);                               // return lorsque la node n'est plus le fils droit
+                    return (tmp);                                        // return lorsque la node n'est plus le fils droit
                 }
 
-                pointer predecessor(pointer node) const       // return le noeud juste en dessous de la node (inverse de successor)
+                pointer predecessor(pointer node) const                   // return le noeud juste en dessous de la node (inverse de successor)
                 {
                     if (node->left != _end)
                         return (max(node->left));
@@ -155,7 +156,7 @@ namespace ft
                     return (tmp);
                 }
 
-                pointer lower_bound(const value_type& value) const      // return le premier noeud qui est n'est pas < (>=) a value
+                pointer lower_bound(const value_type& value) const       // return le premier noeud qui est n'est pas < (>=) a value
                 {
                     pointer find = min();
 
@@ -167,7 +168,7 @@ namespace ft
                     return (find);
                 }
 
-                pointer upper_bound(const value_type& value) const   // return le premier noeud qui est < a value
+                pointer upper_bound(const value_type& value) const      // return le premier noeud qui est < a value
                 {
                     pointer find = min();
 
@@ -178,6 +179,7 @@ namespace ft
                     }
                     return (find);
                 }
+
 
                 /* Capacity */
 
@@ -191,88 +193,89 @@ namespace ft
                 size_type size() const { return (size(_root)); }
                 size_type max_size() const { return (allocator_type().max_size()); }
 
+
                 /* Public Modifiers */
 
-                void    transplant(pointer a, pointer b)              // echanger deux noeuds
+                void    transplant(pointer a, pointer b)                            // echanger deux noeuds
                 {
-                    if (a->parent == NULL)                // cas a == root
+                    if (a->parent == NULL)                                          // cas a == root
                         _root = b;
-                    else if (a == a->parent->left)        // cas a est un enfant gauche
+                    else if (a == a->parent->left)                                  // cas a est un enfant gauche
                         a->parent->left = b;
-                    else                                  // cas a est un enfant droit
+                    else                                                            // cas a est un enfant droit
                         a->parent->right = b; 
-                    b->parent = a->parent;                // MAJ des parents
+                    b->parent = a->parent;                                          // MAJ des parents
                 }
 
-                bool    insert(const value_type& key)                 // inserer un noeud
+                bool    insert(const value_type& key)                               // inserer un noeud
                 {
                     pointer y = NULL;
                     pointer x = _root;
 
-                    while (x != _end)                    // trouver l'emplacement ou inserer
+                    while (x != _end)                                              // trouver l'emplacement ou inserer
                     {
                         y = x;
                         if (_comp(key, x->data))
                             x = x->left;
                         else if (_comp(x->data, key))
                             x = x->right;
-                        else                            // key deja dans l'arbre
+                        else                                                      // key deja dans l'arbre
                             return (false);
                     }
 
                     pointer s = allocator_type().allocate(1);
                     allocator_type().construct(s, node_type(key, red, y, _end, _end));
-                    if (y == NULL)                       // cas arbre vide
+                    if (y == NULL)                                                // cas arbre vide
                         _root = s;
-                    else if (_comp(s->data, y->data))   // cas nouveau noeud a inserer a gauche
+                    else if (_comp(s->data, y->data))                            // cas nouveau noeud a inserer a gauche
                         y->left = s;
-                    else                                // cas nouveau noeud a inserer a droite
+                    else                                                         // cas nouveau noeud a inserer a droite
                         y->right = s;
-                    if (s->parent == NULL)               // cas arbre vide
+                    if (s->parent == NULL)                                        // cas arbre vide
                     {
-                        s->color = black;               // regle : racine toujours noire
+                        s->color = black;                                        // regle : racine toujours noire
                         return (true);
                     }
-                    if (s->parent->parent == NULL)      // cas nouveau noeud = enfant de root = pas besoin de fixup
+                    if (s->parent->parent == NULL)                               // cas nouveau noeud = enfant de root = pas besoin de fixup
                         return (true);
-                    insertFixup(s);                     // réequilibrage de l'arbre
+                    insertFixup(s);                                              // réequilibrage de l'arbre
                     return (true);
                 }
 
-                size_type    delete_node(const value_type& key)        // delete un noeud
+                size_type    delete_node(const value_type& key)                                         // delete un noeud
                 {
                     pointer z = _end;
                     pointer node = _root;
                     pointer x, y;
 
-                    while (node != _end)                             // trouver le noeud
+                    while (node != _end)                                                              // trouver le noeud
                     {
                         if (_comp(key, node->data))
                             node  = node->left;
                         else if (_comp(node->data, key))
                             node = node->right;
-                        else                                         // key trouvée
+                        else                                                                          // key trouvée
                         {
                             z = node;
                             node = node->right;
                         }
                     }
-                    if (z == _end)                                  // cas ou la key n'existe pas
+                    if (z == _end)                                                                   // cas ou la key n'existe pas
                         return (0);
                     y = z;
                     int y_original_color = y->color;
-                                                                   // trouver le noeud a remplacer
-                    if (z->left == _end)                           // cas 1 fils gauche
+                                                                                                    // trouver le noeud a remplacer
+                    if (z->left == _end)                                                            // cas 1 fils gauche
                     {
                         x = z->right;
                         transplant(z, z->right);
-                    }                                              // cas 1 fils droit
+                    }                                                                               // cas 1 fils droit
                     else if (z->right == _end)
                     {
                         x = z->left;
                         transplant(z, z->left);
                     }
-                    else                                           // cas 2 enfants
+                    else                                                                            // cas 2 enfants
                     {
                         y = min(z->right);
                         y_original_color = y->color;
@@ -294,7 +297,7 @@ namespace ft
                     allocator_type().destroy(z);
                     allocator_type().deallocate(z, 1);
 
-                    if (y_original_color == black)              // cas ou l'enfant du noeud a supprimer est noir, fixup necessaire
+                    if (y_original_color == black)                                               // cas ou l'enfant du noeud a supprimer est noir, fixup necessaire
                         deleteFixup(x);
                     return (1);
                 }
@@ -320,6 +323,7 @@ namespace ft
                     ptr._root = tmp_root;
                     ptr._end = tmp_end;
                 }
+
 
                 /* Printing */
 
@@ -353,10 +357,7 @@ namespace ft
                     printTree(node->left, space);
                 }
 
-
-
             private:
-
                 /* Private functions */
 
                 pointer recursive_search(pointer node, const value_type& key) const
@@ -372,23 +373,23 @@ namespace ft
 
                 void    left_rotate(pointer node)
                 {
-                    pointer tmp = node->right;             // tmp = sous arbre droit de la node
+                    pointer tmp = node->right;                                              // tmp = sous arbre droit de la node
 
-                    node->right = tmp->left;               // sous arbre droit de la node = sous arbre gauche de tmp
-                    if (tmp->left != _end)                 // MAJ des parents impliqués
+                    node->right = tmp->left;                                                // sous arbre droit de la node = sous arbre gauche de tmp
+                    if (tmp->left != _end)                                                  // MAJ des parents impliqués
                         tmp->left->parent = node;
                     tmp->parent = node->parent;
-                    if (node->parent == NULL)              // cas ou la node était la racine
+                    if (node->parent == NULL)                                               // cas ou la node était la racine
                         _root = tmp;
                     else if (node == node->parent->left)
                         node->parent->left = tmp;
                     else
                         node->parent->right = tmp;
-                    tmp->left = node;                    // MAJ des liens tmp et de la node
+                    tmp->left = node;                                                     // MAJ des liens tmp et de la node
                     node->parent = tmp;
                 }
 
-                void    right_rotate(pointer node)        // inverse de left_rotate
+                void    right_rotate(pointer node)                                         // inverse de left_rotate
                 {
                     pointer tmp = node->left;
 
@@ -410,31 +411,31 @@ namespace ft
                 {
                     pointer uncle;
 
-                    while (node->parent->color == red)                     // continuer la fonction tant que le parent est rouge
+                    while (node->parent->color == red)                                        // continuer la fonction tant que le parent est rouge
                     {
-                        if (node->parent == node->parent->parent->right)   // si le parent est un enfant droit
+                        if (node->parent == node->parent->parent->right)                      // si le parent est un enfant droit
                         {
                             uncle = node->parent->parent->left;
-                            if (uncle->color == red)                      // cas 1 : l'oncle est rouge
+                            if (uncle->color == red)                                         // cas 1 : l'oncle est rouge
                             {
                                 uncle->color = black;
                                 node->parent->color = black;
                                 node->parent->parent->color = red;
                                 node = node->parent->parent;
                             }
-                            else                                          // cas 2 : l'oncle est noir
+                            else                                                             // cas 2 : l'oncle est noir
                             {
-                                if (node == node->parent->left)          // cas pas de ligne, right_rotate pour en creer une
+                                if (node == node->parent->left)                             // cas pas de ligne, right_rotate pour en creer une
                                 {
                                     node = node->parent;
                                     right_rotate(node);
                                 }
                                 node->parent->color = black;           
                                 node->parent->parent->color = red;
-                                left_rotate(node->parent->parent);      // left_rotate pour finir le fixup
+                                left_rotate(node->parent->parent);                         // left_rotate pour finir le fixup
                             }
                         }
-                        else                                            // si le parent est un enfant gauche
+                        else                                                               // si le parent est un enfant gauche
                         {
                             uncle = node->parent->parent->right;
                             if (uncle->color == red)
@@ -446,7 +447,7 @@ namespace ft
                             }
                             else
                             {
-                                if (node == node->parent->right)    // similaire a au dessus mais inversé
+                                if (node == node->parent->right)                       // similaire a au dessus mais inversé
                                 {
                                     node = node->parent;
                                     left_rotate(node);
@@ -459,7 +460,7 @@ namespace ft
                         if (node == _root)
                             break;
                     }
-                    _root->color = black;                        // regle root est toujours noire
+                    _root->color = black;                                           // regle root est toujours noire
                 }
 
                 void    deleteFixup(pointer node)
@@ -468,10 +469,10 @@ namespace ft
 
                     while (node != _root && node->color == black)
                     {
-                        if (node == node->parent->left)       // cas x = left, sibling = right
+                        if (node == node->parent->left)                                        // cas x = left, sibling = right
                         {
                             sibling = node->parent->right;
-                            if (sibling->color == red)       // cas 1, le frere est rouge
+                            if (sibling->color == red)                                        // cas 1, le frere est rouge
                             {
                                 sibling->color = black;
                                 node->parent->color = red;
@@ -502,7 +503,7 @@ namespace ft
                         else
                         {
                             sibling = node->parent->left;
-                            if (sibling->color == red)       // cas 1, le frere est rouge
+                            if (sibling->color == red)                                        // cas 1, le frere est rouge
                             {
                                 sibling->color = black;
                                 node->parent->color = red;
@@ -544,7 +545,7 @@ namespace ft
                     allocator_type().deallocate(node, 1);
                 }
 
-            
+            private:
 
                 pointer                   _root;
                 pointer                   _end;

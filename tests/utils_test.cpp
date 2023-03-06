@@ -6,11 +6,12 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:01:14 by stan              #+#    #+#             */
-/*   Updated: 2023/03/02 19:54:41 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:03:46 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+
 #include "test_include.hpp"
 
 template <typename T>
@@ -22,11 +23,8 @@ std::string	printPair(const T &iterator, bool nl = true, std::ostream &o = std::
 	return ("");
 }
 
-
 void	is_empty(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct)
-{
-	std::cout << "is_empty: " << vct.empty() << std::endl;
-}
+{ std::cout << "is_empty: " << vct.empty() << std::endl; }
 
 template <typename T>
 void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true)
@@ -34,7 +32,6 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 	const T_SIZE_TYPE size = vct.size();
 	const T_SIZE_TYPE capacity = vct.capacity();
 	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
-	// Cannot limit capacity's max value because it's implementation dependent
 
 	std::cout << "size: " << size << std::endl;
 	std::cout << "capacity: " << isCapacityOk << std::endl;
@@ -47,7 +44,7 @@ void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true
 		for (; it != ite; ++it)
 			std::cout << "- " << *it << std::endl;
 	}
-	std::cout << "###############################################" << std::endl;
+	std::cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" << std::endl;
 }
 
 template <class T>
@@ -72,7 +69,7 @@ void	printSizeMap(T_MAP const &mp, bool print_content = 1)
 		for (; it != ite; ++it)
 			std::cout << "- " << printPair(it, false) << std::endl;
 	}
-	std::cout << "###############################################" << std::endl;
+	std::cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" << std::endl;
 }
 
 void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
