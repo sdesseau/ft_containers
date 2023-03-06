@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ite_map.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:42:28 by stan              #+#    #+#             */
-/*   Updated: 2023/03/03 18:20:37 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:10:32 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ void rite()
 	TESTED_NAMESPACE::map<t4, t5>::iterator it_ = mp.begin();
 	TESTED_NAMESPACE::map<t4, t5>::reverse_iterator it(it_), ite;
 	printSizeMap(mp);
-
-	std::cout << "TEST OFFSET" << std::endl;
-	--it;
-	printPair(it);
 
 	it = mp.rbegin(); ite = mp.rend();
 	while (it != ite)

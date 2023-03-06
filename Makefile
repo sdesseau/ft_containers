@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+         #
+#    By: stan <stan@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/02 20:13:21 by stan              #+#    #+#              #
-#    Updated: 2023/03/05 20:00:15 by sdesseau         ###   ########.fr        #
+#    Updated: 2023/03/06 13:12:47 by stan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,15 +28,15 @@ BLUE		:= \033[1;34m
 CYAN 		:= \033[1;36m
 RM		    := rm -f
 
-# ${NAME}:	${OBJS}
-# 			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-# 			${CC} ${FLAGS} -o $(NAME) $(SRCS)
-# 			@echo "$(GREEN)$(NAME) created[0m ✔️"
-
 ${NAME}:	${OBJS}
 			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-			${CC} ${FLAGS} -o $(NAME) $(SRCS_TESTS)
+			${CC} ${FLAGS} -o $(NAME) $(SRCS)
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
+
+# ${NAME}:	${OBJS}
+# 			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
+# 			${CC} ${FLAGS} -o $(NAME) $(SRCS_TESTS)
+# 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
 all:		${NAME}
 

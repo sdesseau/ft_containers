@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:46:12 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 12:55:03 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 13:12:08 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include "define.hpp"
 #include <list>
 #include <map>
-// #include <stack>
+#include <stack>
 #include "../containers/stack.hpp"
 
 #include "assign.hpp"
@@ -40,4 +40,4 @@
 #include "equal_range.hpp"
 #include "tests_stack.hpp"
 #include "print_tree.hpp"
-// #include "push_top.hpp"
+#include "push_top.hpp"
