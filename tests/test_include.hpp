@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:46:12 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 02:16:43 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 12:55:03 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,6 @@
 #include "erase_map.hpp"
 #include "ite_map.hpp"
 #include "equal_range.hpp"
+#include "tests_stack.hpp"
+#include "print_tree.hpp"
 // #include "push_top.hpp"

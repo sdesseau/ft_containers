@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:06:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 02:00:55 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 12:47:06 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,8 @@ namespace ft
                 key_compare key_comp() const { return (key_compare()); }
 
                 value_compare value_comp() const { return (value_compare(key_comp())); }
+
+                void print() { _tree.printTree(_tree.getRoot(), 1); }
                 
             private:
                 tree _tree;

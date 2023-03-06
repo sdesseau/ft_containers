@@ -321,6 +321,45 @@ namespace ft
                     ptr._end = tmp_end;
                 }
 
+                /* Printing */
+
+                // give the width of the tree
+
+                int     width(pointer node) const
+                {
+                    if (node == _end)
+                        return (0);
+                    return (std::max(width(node->left), width(node->right)) + 1);
+                }
+
+                // print the tree structure and color using the width fonction
+
+                void    printTree(pointer node, int space) const
+                { 
+                    if (node == _end)
+                        return ;
+                    space += width(_root);
+                    printTree(node->right, space);
+                    std::cout << std::endl;
+                    for (int i = width(_root); i < space; i++)
+                        std::cout << " ";
+                    // create little stick for left and right child
+                    if (node->parent != NULL)
+                    {
+                        if (node->parent->left == node)
+                            std::cout << "/";
+                        else
+                            std::cout << "\\";
+                    }
+                    if (node->color == red)
+                        std::cout << "\033[1;31m" << "<" << node->data.first << ", " << node->data.second << ">" << "\033[0m" << std::endl;
+                    else
+                        std::cout << "\033[1;32m" << "<" << node->data.first << ", " << node->data.second << ">" << "\033[0m" << std::endl;
+                    printTree(node->left, space);
+                }
+
+
+
             private:
 
                 /* Private functions */
@@ -509,6 +548,8 @@ namespace ft
                     allocator_type().destroy(node);
                     allocator_type().deallocate(node, 1);
                 }
+
+            
 
                 pointer                   _root;
                 pointer                   _end;
