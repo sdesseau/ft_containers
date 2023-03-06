@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 00:43:02 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 02:22:53 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,13 @@ namespace ft
 					_begin = ptr;
                 }
 
-				vector (const vector& x) : _alloc(x._alloc), _capacity(x._size), _size(x._size)
+				vector (const vector& x)
 			    {
 					_begin = NULL;
       				_alloc = x._alloc;
       				_size = 0;
       				_capacity = 0;
+					reserve(x._size);
       				assign(x.begin(), x.end());
 					_capacity = _size;
 			    }
@@ -90,7 +91,7 @@ namespace ft
 				~vector()
 				{
 					this->clear();
-					_alloc.deallocate(_begin, this->capacity());
+					// _alloc.deallocate(_begin, this->capacity());
 				}
 
 				vector& operator= (const vector& x)
@@ -377,6 +378,8 @@ namespace ft
 
 				void clear()
 				{ resize(0); }
+
+				T* data() { return (_begin); }
 
 				/* Allocator */
 

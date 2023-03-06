@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   define.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:58:20 by stan              #+#    #+#             */
-/*   Updated: 2023/03/05 20:30:20 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/06 02:23:47 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #define TESTED_TYPE int
-#define TESTED_TYPE2 double
+#define TESTED_TYPE2 int
 #define TESTED_NAMESPACE ft
 
 #define T1 int

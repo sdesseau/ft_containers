@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:06:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/05 18:33:46 by sdesseau         ###   ########.fr       */
+/*   Updated: 2023/03/06 02:00:55 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ namespace ft
                     return (find(value.first));
                 }
 
-                template< class InputIt >
+                template< class InputIt>
                     void insert(InputIt first, InputIt last)
                     {
                         for ( ; first != last; ++first)
