@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:53:35 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 12:54:24 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 13:42:12 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ void tests_stack()
 	printf("size: %lu\n", mystack3.size());
 	printf("top: %d\n", mystack3.top());
 	mystack3.pop();
+	printf("top: %d\n", mystack3.top());
+	mystack3.pop();
+
+	// test operator =
+	mystack3 = mystack;
+	printf("size: %lu\n", mystack3.size());
 	printf("top: %d\n", mystack3.top());
 	mystack3.pop();
 

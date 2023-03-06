@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 02:22:53 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 13:37:27 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ namespace ft
 		class vector
 		{
 			public:
+			
 				/* Typedefs */
 
 				typedef T                                                          value_type;
@@ -41,10 +42,11 @@ namespace ft
 				typedef RevIterator<const T>             const_reverse_iterator;
 				typedef typename std::ptrdiff_t								       difference_type; 
 
-				/* Member functions */
 
-				explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _capacity(0), _size(0), _begin(NULL)
-			    {}
+				/* Member functions */
+			
+
+				explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _capacity(0), _size(0), _begin(NULL) {}
 
 				explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _capacity(n),  _size(n)
 			    {
@@ -104,6 +106,38 @@ namespace ft
                         this->_begin[i] = x._begin[i];
                     return (*this);
                 }
+				
+
+				/* Element access */
+
+				reference operator[] (size_type n) { return (_begin[n]); }
+
+				const_reference operator[] (size_type n) const { return (_begin[n]); }
+
+				reference at(size_type n)
+				{
+					if (n >= _size)
+						throw std::out_of_range("vector::at");
+					return (_begin[n]);
+				}
+
+				const_reference at(size_type n) const
+				{
+					if (n >= _size)
+						throw std::out_of_range("vector::at");
+					return (_begin[n]);
+				}
+
+				reference front() { return (_begin[0]); }
+
+				const_reference front() const { return (_begin[0]); }
+
+				reference back() { return (_begin[_size - 1]); }
+
+				const_reference back() const { return (_begin[_size - 1]); }
+
+				T* data() { return (_begin); }
+				
 
 				/* Iterators */
 				
@@ -121,6 +155,7 @@ namespace ft
 				reverse_iterator rend() { return (reverse_iterator(iterator(this->_begin) - 1)); }
 
 				const_reverse_iterator rend() const { return (const_reverse_iterator(const_iterator(this->_begin) - 1)); }
+				
 
 				/* Capacity */
 
@@ -172,33 +207,6 @@ namespace ft
 					_alloc.deallocate(start, prev_capa);
 				}
 
-				/* Element access */
-
-				reference operator[] (size_type n) { return (_begin[n]); }
-
-				const_reference operator[] (size_type n) const { return (_begin[n]); }
-
-				reference at(size_type n)
-				{
-					if (n >= _size)
-						throw std::out_of_range("vector::at");
-					return (_begin[n]);
-				}
-
-				const_reference at(size_type n) const
-				{
-					if (n >= _size)
-						throw std::out_of_range("vector::at");
-					return (_begin[n]);
-				}
-
-				reference front() { return (_begin[0]); }
-
-				const_reference front() const { return (_begin[0]); }
-
-				reference back() { return (_begin[_size - 1]); }
-
-				const_reference back() const { return (_begin[_size - 1]); }
 
 				/* Modifiers */
 
@@ -378,8 +386,6 @@ namespace ft
 
 				void clear()
 				{ resize(0); }
-
-				T* data() { return (_begin); }
 
 				/* Allocator */
 

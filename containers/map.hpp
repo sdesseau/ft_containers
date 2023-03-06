@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:06:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 12:47:06 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 13:25:29 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ namespace ft
                     map(InputIterator first, InputIterator last,
                         const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),
                         typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
-                            : _tree(value_compare(comp))
-                    { (void)alloc; insert(first, last); }
+                            : _tree(value_compare(comp)) { (void)alloc; insert(first, last); }
 
                 map( const map& other ) : _tree(value_compare(key_compare()))
                 { insert(other.begin(), other.end()); }
@@ -152,7 +151,7 @@ namespace ft
 
                 ft::pair<iterator, bool> insert(const value_type& value)
                 {
-                    const bool ret= _tree.insert(value);
+                    const bool ret = _tree.insert(value);
                     return (ft::make_pair(find(value.first), ret));
                 }
 
@@ -163,7 +162,7 @@ namespace ft
                     return (find(value.first));
                 }
 
-                template< class InputIt>
+                template<class InputIt>
                     void insert(InputIt first, InputIt last)
                     {
                         for ( ; first != last; ++first)

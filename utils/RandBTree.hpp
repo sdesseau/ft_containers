@@ -323,16 +323,12 @@ namespace ft
 
                 /* Printing */
 
-                // give the width of the tree
-
                 int     width(pointer node) const
                 {
                     if (node == _end)
                         return (0);
                     return (std::max(width(node->left), width(node->right)) + 1);
                 }
-
-                // print the tree structure and color using the width fonction
 
                 void    printTree(pointer node, int space) const
                 { 
@@ -343,7 +339,6 @@ namespace ft
                     std::cout << std::endl;
                     for (int i = width(_root); i < space; i++)
                         std::cout << " ";
-                    // create little stick for left and right child
                     if (node->parent != NULL)
                     {
                         if (node->parent->left == node)

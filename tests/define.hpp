@@ -6,7 +6,7 @@
 /*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:58:20 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 13:11:14 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 13:21:14 by stan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define TESTED_TYPE int
 #define TESTED_TYPE2 int
-#define TESTED_NAMESPACE std
+#define TESTED_NAMESPACE ft
 
 #define T1 int
 #define T2 int
