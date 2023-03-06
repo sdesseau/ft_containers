@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:12:13 by sdesseau          #+#    #+#             */
-/*   Updated: 2023/03/06 13:47:34 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 15:57:05 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,17 @@ namespace ft
 
     /* Non-member function overloads */
 
-    template <class T>
-        bool operator==(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() == r.getC()); };
-	template <class T>
-        bool operator!=(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() != r.getC()); };
-	template <class T>
-        bool operator<(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() < r.getC()); };
-	template <class T>
-        bool operator<=(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() <= r.getC()); };
-	template <class T>
-        bool operator>(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() > r.getC()); };
-	template <class T>
-        bool operator>=(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() >= r.getC()); };
+        template <class T>
+                bool operator==(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() == r.getC()); };
+        template <class T>
+                bool operator!=(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() != r.getC()); };
+        template <class T>
+                bool operator<(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() < r.getC()); };
+        template <class T>
+                bool operator<=(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() <= r.getC()); };
+        template <class T>
+                bool operator>(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() > r.getC()); };
+        template <class T>
+                bool operator>=(ft::stack<T> const & l, ft::stack<T> const & r) { return (l.getC() >= r.getC()); };
 
 }

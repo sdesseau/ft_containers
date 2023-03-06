@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:22:27 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 13:47:25 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 16:05:20 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,19 @@ namespace ft
 					_begin = ptr;
                 }
 
-				vector (const vector& x)
-			    {
-					_begin = NULL;
-      				_alloc = x._alloc;
-      				_size = 0;
-      				_capacity = 0;
-					reserve(x._size);
-      				assign(x.begin(), x.end());
-					_capacity = _size;
-			    }
+				vector (const vector& x) :
+			    		_alloc(x._alloc),
+						_capacity(0),
+						_size(0),
+						_begin(NULL)
+				{
+					insert(begin(), x.begin(), x.end());
+				}
 
 				~vector()
 				{
 					this->clear();
-					// _alloc.deallocate(_begin, this->capacity());
+					_alloc.deallocate(_begin, this->capacity());
 				}
 
 				vector& operator= (const vector& x)

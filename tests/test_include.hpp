@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_include.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:46:12 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 14:02:37 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 16:10:12 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@
 #include "ite_map.hpp"
 #include "equal_range.hpp"
 #include "tests_stack.hpp"
-#include "print_tree.hpp"
 #include "push_top.hpp"
+
+
+// #include "print_tree.hpp"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_stack.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stan <stan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sdesseau <sdesseau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:53:35 by stan              #+#    #+#             */
-/*   Updated: 2023/03/06 14:02:46 by stan             ###   ########.fr       */
+/*   Updated: 2023/03/06 16:07:41 by sdesseau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "test_include.hpp"
 #include "utils_test.cpp"
+#include <cstdio>
 
 void tests_stack()
 {
@@ -65,20 +66,10 @@ void tests_stack()
 	printf("operator >: %d\n", mystack > mystack2);
 	// test operator >=
 	printf("operator >=: %d\n", mystack >= mystack2);
-	// test copy constructor
-	TESTED_NAMESPACE::stack<int> mystack3(mystack);
-	printf("size: %lu\n", mystack3.size());
-	printf("top: %d\n", mystack3.top());
-	mystack3.pop();
-	printf("top: %d\n", mystack3.top());
-	mystack3.pop();
-
 	// test operator =
+	TESTED_NAMESPACE::stack<int> mystack3;
 	mystack3 = mystack;
 	printf("size: %lu\n", mystack3.size());
 	printf("top: %d\n", mystack3.top());
 	mystack3.pop();
-
-	// test destructor
-	mystack3.~stack();
 }

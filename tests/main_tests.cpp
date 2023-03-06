@@ -25,10 +25,10 @@ void test_all()
 
 	std::cout << "Tests Stack" << std::endl;
 
-	// std::cout << std::endl << "                   New Test::push" << std::endl;
-	// test_push();
-	// std::cout << std::endl << "                   New Test::stack" << std::endl;
-	// tests_stack();
+	std::cout << std::endl << "                   New Test::push" << std::endl;
+	test_push();
+	std::cout << std::endl << "                   New Test::stack" << std::endl;
+	tests_stack();
 
 	// /* Test Map */
 
@@ -98,6 +98,6 @@ int main()
 	// print_tree();
 
 	// test all the tests
-	// test_all(); 
+	test_all(); 
 	return (0);
 }
