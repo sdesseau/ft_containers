@@ -97,6 +97,8 @@ int main()
 
 	// print_tree();
 
+
+
 	// test all the tests
 	test_all(); 
 	return (0);
